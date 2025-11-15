@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -193,6 +194,8 @@ namespace Games.Maths
                 float randomRotationAngle = (float) Random.NextDouble() * (maxRotation - minRotation) + minRotation;
                 Balloon balloon = Instantiate(balloonPrefab, randomSpawnPosition, Quaternion.Euler(0, 0, randomRotationAngle), balloonsParent.transform);
                 balloon.number = GetRandomNumber(minNumber, maxNumber);
+                balloon.balloonIndex = balloonCount + 1;
+                balloon.name = balloon.ToString();
                 balloon.rotationSpeed = GetRandomSpeed(minRotationSpeed, maxRotationSpeed);
                 balloon.moveSpeed = GetRandomSpeed(minMoveSpeed, maxMoveSpeed);
                 
@@ -210,6 +213,7 @@ namespace Games.Maths
             {
                 SpawnBalloon();
             }
+            PrintAllBalloons(); // Print all balloons with their numbers
         }
 
         public bool AreAllBalloonsPopped()
@@ -233,20 +237,35 @@ namespace Games.Maths
             {
                 return false;
             }
-            PopBallon(hitBalloon);
-            return PopBallon(hitBalloon);
+            return PopBalloon(hitBalloon);
         }
         
         // Try to pop the balloon and return true if it is correct (balloons popped in ascending order)
-        public bool PopBallon(Balloon balloon)
+        public bool PopBalloon(Balloon balloon)
         {
-            if (lastPoppedBalloon < balloon) 
+            // First balloon : Check if it's the minimum in the list of balloons
+            if (!lastPoppedBalloon)
             {
-                // TODO : Wrong X
-                return false;
+                Balloon minBalloon = balloons.OrderBy(b => b.number).First();
+                bool smallestBalloon = balloon.number == minBalloon.number;
+                if (!smallestBalloon)
+                {
+                    Debug.Log($"Failed to pop {balloon} because {minBalloon} is lower than it");
+                    return false;
+                }
+            }
+            // Check if balloon is greater than previously popped balloon 
+            else 
+            {
+                if (balloon.number < lastPoppedBalloon.number)
+                {
+                    Debug.Log($"Failed to pop {balloon} because its number is lower than the one previously popped : {lastPoppedBalloon}");
+                    return false;
+                }
             }
 
             // Balloon number is greater than the previous one : Destroy balloon
+            Debug.Log($"Popped {balloon}");
             lastPoppedBalloon = balloon;
             balloons.Remove(balloon);
             Destroy(balloon.gameObject);
@@ -257,5 +276,21 @@ namespace Games.Maths
             }
             return true;
         }
+        
+        public void PrintAllBalloons()
+        {
+            string result = "";
+            foreach (Balloon balloon in balloons)
+            {
+                result += balloon;
+                if (balloon.balloonIndex != balloonCount)
+                {
+                    result += "\n";
+                }
+            }
+            Debug.Log(result);
+        }
     }
+    
+    
 }

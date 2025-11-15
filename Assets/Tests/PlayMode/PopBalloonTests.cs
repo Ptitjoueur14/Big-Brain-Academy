@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Tests.PlayMode
 {
-    public class BalloonPopTests
+    public class PopBalloonTests
     {
         public BalloonBurst BalloonBurst;
         
@@ -27,21 +27,21 @@ namespace Tests.PlayMode
         }
         
         [Test]
-        public void PopBalloon_Correct()
+        public void PopBalloon_Correct_Comparison_PreviousBalloon()
         {
             // Create last popped balloon (number 5)
             Balloon lastBalloon = new GameObject().AddComponent<Balloon>();
-            lastBalloon.number = 5;
+            lastBalloon.number = 3;
             BalloonBurst.lastPoppedBalloon = lastBalloon;
 
             // Create new balloon to pop (number 3)
             Balloon newBalloon = new GameObject().AddComponent<Balloon>();
-            newBalloon.number = 3;
+            newBalloon.number = 5;
 
             BalloonBurst.balloons.Add(newBalloon);
 
             // Act
-            bool result = BalloonBurst.PopBallon(newBalloon);
+            bool result = BalloonBurst.PopBalloon(newBalloon);
 
             // Assert
             Assert.IsTrue(result);
@@ -51,22 +51,42 @@ namespace Tests.PlayMode
             Object.DestroyImmediate(lastBalloon);
             Object.DestroyImmediate(newBalloon);
         }
+        
+        [Test]
+        public void PopBalloon_Correct_NoComparison_FirstBalloon()
+        {
+            // Create new balloon to pop (number 3)
+            Balloon newBalloon = new GameObject().AddComponent<Balloon>();
+            newBalloon.number = 3;
+
+            BalloonBurst.balloons.Add(newBalloon);
+
+            // Act
+            bool result = BalloonBurst.PopBalloon(newBalloon);
+
+            // Assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(BalloonBurst.lastPoppedBalloon, newBalloon);
+            Assert.IsFalse(BalloonBurst.balloons.Contains(newBalloon));
+            
+            Object.DestroyImmediate(newBalloon);
+        }
 
         [Test]
-        public void PopBalloon_Wrong()
+        public void PopBalloon_Wrong_Comparison_PreviousBalloon()
         {
             // Last popped is 3
             Balloon lastBalloon = new GameObject().AddComponent<Balloon>();
             lastBalloon.number = 3;
             BalloonBurst.lastPoppedBalloon = lastBalloon;
 
-            // Try to pop a balloon with number 7 (wrong order)
+            // Try to pop a balloon with number 2 (wrong order)
             Balloon wrongBalloon = new GameObject().AddComponent<Balloon>();
-            wrongBalloon.number = 7;
+            wrongBalloon.number = 2;
             BalloonBurst.balloons.Add(wrongBalloon);
 
             // Act
-            bool result = BalloonBurst.PopBallon(wrongBalloon);
+            bool result = BalloonBurst.PopBalloon(wrongBalloon);
 
             // Assert
             Assert.IsFalse(result);                      // should not pop
@@ -77,20 +97,26 @@ namespace Tests.PlayMode
         }
         
         [Test]
-        public void AreAllBalloonsPopped_ReturnsTrueWhenEmpty()
+        public void PopBalloon_Wrong_NoComparison_FirstBalloon()
         {
-            BalloonBurst.balloons.Clear();
-            Assert.IsTrue(BalloonBurst.AreAllBalloonsPopped());
-        }
+            Balloon otherBalloon = new GameObject().AddComponent<Balloon>();
+            otherBalloon.number = 3;
+            BalloonBurst.balloons.Add(otherBalloon);
+            
+            // Try to pop a balloon with number 5 (wrong order)
+            Balloon wrongBalloon = new GameObject().AddComponent<Balloon>();
+            wrongBalloon.number = 5;
+            BalloonBurst.balloons.Add(wrongBalloon);
 
-        [Test]
-        public void AreAllBalloonsPopped_ReturnsFalseWhenNotEmpty()
-        {
-            Balloon balloon = new GameObject().AddComponent<Balloon>();
-            BalloonBurst.balloons.Add(balloon);
- 
-            Assert.IsFalse(BalloonBurst.AreAllBalloonsPopped());
-            Object.DestroyImmediate(BalloonBurst);
+            // Act
+            bool result = BalloonBurst.PopBalloon(wrongBalloon);
+
+            // Assert
+            Assert.IsFalse(result);                      // should not pop
+            Assert.IsTrue(BalloonBurst.balloons.Contains(wrongBalloon)); // still in list
+            
+            Object.DestroyImmediate(otherBalloon);
+            Object.DestroyImmediate(wrongBalloon);
         }
     }
 }

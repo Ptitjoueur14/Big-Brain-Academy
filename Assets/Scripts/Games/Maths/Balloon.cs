@@ -5,14 +5,19 @@ namespace Games.Maths
 {
     public class Balloon : MonoBehaviour
     {
+        public int balloonIndex; // The index of the balloon in the list of balloons of the BalloonBurst
+        public int number; //The number shown on the balloon -> balloon value
+        
         public float moveSpeed;
         public float rotationSpeed;
-        public Rigidbody2D rb;
-        public int number; //The number shown on the balloon -> balloon value
-        public SpriteRenderer graphics;
-        public System.Random Random;
         public int randomMoveDirection;
 
+        public Rigidbody2D rb;
+        
+        public SpriteRenderer graphics;
+        
+        public System.Random Random;
+        
         private void Awake()
         {
             Random = new System.Random(number);
@@ -41,6 +46,11 @@ namespace Games.Maths
         public static bool operator >(Balloon balloon1, Balloon balloon2)
         {
             return balloon1.number > balloon2.number;
+        }
+
+        public override string ToString()
+        {
+            return "Balloon " + balloonIndex + ": Number " + number;
         }
     }
 }
