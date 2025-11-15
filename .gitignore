@@ -88,3 +88,6 @@ InitTestScene*.unity*
 # files in platform-specific subfolders, for example:
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# JetBrains Rider / IntelliJ
+.idea/
