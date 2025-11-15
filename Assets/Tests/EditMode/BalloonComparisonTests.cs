@@ -1,3 +1,4 @@
+using Games.Maths;
 using NUnit.Framework;
 using UnityEngine;
 using Assert = NUnit.Framework.Assert;
