@@ -5,7 +5,6 @@ namespace Games.Maths
 {
     public class Balloon : MonoBehaviour
     {
-        public GameObject balloon;
         public float moveSpeed;
         public float rotationSpeed;
         public Rigidbody2D rb;

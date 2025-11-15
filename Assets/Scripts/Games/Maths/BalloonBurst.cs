@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using UnityEngine;
-using Quaternion = UnityEngine.Quaternion;
-using Vector2 = UnityEngine.Vector2;
+using UnityEngine.UIElements;
 
 namespace Games.Maths
 {
@@ -95,7 +93,7 @@ namespace Games.Maths
                     maxMoveSpeed = 0.5f;
                     break;
             }
-            balloonCount = Random.Next(minBalloonCount, maxBalloonCount + 1);
+            totalBalloons = Random.Next(minBalloonCount, maxBalloonCount + 1);
         }
         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -107,7 +105,10 @@ namespace Games.Maths
         // Update is called once per frame
         void Update()
         {
-        
+            if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse))
+            {
+                ClickBalloon();
+            }
         }
         
         // Pick a unique random number for the new balloon not already in the balloon list
@@ -183,7 +184,7 @@ namespace Games.Maths
         }
         
         // Spawns a new balloon in a random position
-        public void SpawnBalloon()
+        public Balloon SpawnBalloon()
         {
             if (balloonCount < totalBalloons)
             {
@@ -198,12 +199,14 @@ namespace Games.Maths
                 // Add balloon to list
                 balloons.Add(balloon);
                 balloonCount++;
+                return balloon;
             }
+            return null;
         }
 
         public void SpawnAllBalloons()
         {
-            for (int i = 0; i < balloonCount; i++)
+            for (int i = 0; i < totalBalloons; i++)
             {
                 SpawnBalloon();
             }
@@ -215,6 +218,23 @@ namespace Games.Maths
             
             // Spawn new ballons (next level)
             return balloons.Count == 0;
+        }
+
+        public bool ClickBalloon()
+        {
+            Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
+            if (!hit)
+            {
+                return false;
+            }
+            Balloon hitBalloon = hit.collider.GetComponent<Balloon>();
+            if (!hitBalloon)
+            {
+                return false;
+            }
+            PopBallon(hitBalloon);
+            return PopBallon(hitBalloon);
         }
         
         // Try to pop the balloon and return true if it is correct (balloons popped in ascending order)
@@ -229,11 +249,11 @@ namespace Games.Maths
             // Balloon number is greater than the previous one : Destroy balloon
             lastPoppedBalloon = balloon;
             balloons.Remove(balloon);
-            Destroy(balloon);
+            Destroy(balloon.gameObject);
 
             if (AreAllBalloonsPopped()) // put ts somewhere else (click)
             {
-                SpawnAllBalloons();
+                //SpawnAllBalloons(); FIX
             }
             return true;
         }
