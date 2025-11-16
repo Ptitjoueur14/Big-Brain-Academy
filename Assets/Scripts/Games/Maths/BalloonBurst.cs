@@ -46,6 +46,9 @@ namespace Games.Maths
         public float maxY;
         public float minDistanceBetweenBalloons;
         
+        [Header("Balloon Colors")]
+        public List<Sprite> balloonColors;
+        
         void Awake()
         {
             Random = new System.Random(DateTime.Now.Millisecond); // Random to assign random values to balloon fields
@@ -54,7 +57,7 @@ namespace Games.Maths
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
         {
-             switch (Difficulty.DifficultyLevel) 
+            switch (Difficulty.DifficultyLevel) 
             {
                 case DifficultyLevel.Easy: // 3-4 balloons with values [0;7]
                     minBalloonCount = 3;
@@ -98,15 +101,14 @@ namespace Games.Maths
                     minNumber = -99;
                     maxNumber = 99;
                     minRotation = 20;
-                    maxRotation = 180;
-                    minRotationSpeed = 3f;
-                    maxRotationSpeed = 6f;
+                    maxRotation = 60;
+                    minRotationSpeed = 2f;
+                    maxRotationSpeed = 5f;
                     minMoveSpeed = 0.3f;
-                    maxMoveSpeed = 0.5f;
+                    maxMoveSpeed = 0.8f;
                     break;
             }
             
-            totalBalloons = Random.Next(minBalloonCount, maxBalloonCount + 1);
             SpawnAllBalloons();
         }
 
@@ -199,12 +201,32 @@ namespace Games.Maths
                 // Spawn balloon in random position after checking if it doesn't overlap with a corner or other balloon
                 Vector2 randomSpawnPosition = GetRandomSpawnPosition();
                 float randomRotationAngle = (float) Random.NextDouble() * (maxRotation - minRotation) + minRotation;
-                Balloon balloon = Instantiate(balloonPrefab, randomSpawnPosition, Quaternion.Euler(0, 0, randomRotationAngle), balloonsParent.transform);
+                bool isRightRotation = Random.Next(0, 2) == 0;
+                if (isRightRotation) // Rotate to the right 50% of the time
+                {
+                    randomRotationAngle *= -1; // Can rotate left or right
+                }
+                Balloon balloon = Instantiate(
+                    balloonPrefab, 
+                    randomSpawnPosition, 
+                    Quaternion.Euler(0, 0, randomRotationAngle), 
+                    balloonsParent.transform
+                    );
                 balloon.number = GetRandomNumber(minNumber, maxNumber);
                 balloon.balloonIndex = balloonCount + 1;
                 balloon.name = balloon.ToString();
+                
+                // Balloon has a random color in the list of colors
+                int randomColorIndex = Random.Next(balloonColors.Count);
+                balloon.graphics.sprite = balloonColors[randomColorIndex];
+                
                 balloon.rotationSpeed = GetRandomSpeed(minRotationSpeed, maxRotationSpeed);
                 balloon.moveSpeed = GetRandomSpeed(minMoveSpeed, maxMoveSpeed);
+
+                if (isRightRotation)
+                {
+                    balloon.rotationSpeed *= -1; // Make right-tilted ballons rotate to the right
+                }
                 
                 // Add balloon to list
                 balloons.Add(balloon);
@@ -216,6 +238,7 @@ namespace Games.Maths
 
         public void SpawnAllBalloons()
         {
+            totalBalloons = Random.Next(minBalloonCount, maxBalloonCount + 1);
             for (int i = 0; i < totalBalloons; i++)
             {
                 SpawnBalloon();
@@ -246,10 +269,15 @@ namespace Games.Maths
                 return false;
             }
 
-            if (PopBalloon(hitBalloon) && AreAllBalloonsPopped())
+            if (PopBalloon(hitBalloon) && AreAllBalloonsPopped()) // All balloons popped : Restart game
             {
                 lastPoppedBalloonNumber = -100;
                 SpawnAllBalloons(); //FIX
+                
+                Timer timer = GameManager.Instance.GetComponent<Timer>();
+                GameManager.Instance.IncreaseLevelsSolved(); //Increment levels solved counter
+                Debug.Log($"Time taken to solve level : {timer.DisplayTimer(timer.currentLevelTimer)}. Total time : {timer.DisplayTimer(timer.gameTimer)}. Levels solved : {GameManager.Instance.levelsSolved}");
+                timer.UpdateLevelTimers();
             }
             return true;
         }
@@ -265,12 +293,12 @@ namespace Games.Maths
             Balloon minBalloon = balloons.OrderBy(b => b.number).First(); 
             if (balloon != minBalloon) 
             { 
-                Debug.Log($"Failed to pop {balloon} because {minBalloon} is lower than it"); 
+                //Debug.Log($"Failed to pop {balloon} because {minBalloon} is lower than it"); 
                 return false;
             }
 
             // Balloon number is greater than the previous one : Destroy balloon
-            Debug.Log($"Popped {balloon}");
+            //Debug.Log($"Popped {balloon}");
             lastPoppedBalloonNumber= balloon.number;
             balloons.Remove(balloon);
             Destroy(balloon.gameObject);
@@ -290,7 +318,7 @@ namespace Games.Maths
                     result += "\n";
                 }
             }
-            Debug.Log(result);
+            //Debug.Log(result);
         }
     }
 }

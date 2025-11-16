@@ -1,7 +1,8 @@
 {
     "name": "EditModeTests",
     "references": [
-        "GameRuntime"
+        "GameRuntime",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [
         "Editor"

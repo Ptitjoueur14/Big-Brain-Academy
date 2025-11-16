@@ -4,9 +4,9 @@ using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 
-namespace Tests.PlayMode
+namespace BalloonBurstTests
 {
-    public class SpawnBallonTests
+    public class SpawnBalloonTests
     {
         public BalloonBurst BalloonBurst;
 
@@ -35,8 +35,15 @@ namespace Tests.PlayMode
             
             GameObject prefab = new GameObject("BalloonPrefab");
             prefab.AddComponent<Rigidbody2D>();
+            
             BalloonBurst.balloonPrefab = prefab.AddComponent<Balloon>();
             
+            SpriteRenderer graphics = prefab.AddComponent<SpriteRenderer>();
+            BalloonBurst.balloonPrefab.graphics = graphics;
+            
+            graphics.sprite = Sprite.Create(new Texture2D(5, 5), new Rect(0, 0, 5, 5), new Vector2(0.5f, 0.5f));
+            BalloonBurst.balloonColors = new List<Sprite> { graphics.sprite };
+
             GameObject textObj = new GameObject("NumberText");
             textObj.transform.parent = prefab.transform;
             TMP_Text text = textObj.AddComponent<TextMeshPro>();
@@ -74,7 +81,12 @@ namespace Tests.PlayMode
             // Random value range checks
             Assert.That(BalloonBurst.totalBalloons, Is.InRange(3, 4));
             Assert.That(newBalloon.number, Is.InRange(0, 7));
-            Assert.That(newBalloon.transform.rotation.eulerAngles.z, Is.InRange(0f, 5f));
+            float z = newBalloon.transform.rotation.eulerAngles.z;
+            if (z > 180f)
+            {
+                z -= 360f;
+            }
+            Assert.That(z, Is.InRange(-5f, 5f));
             Assert.That(newBalloon.rotationSpeed, Is.InRange(0f, 0.05f));
             Assert.That(newBalloon.moveSpeed, Is.InRange(0f, 0.1f));
 
@@ -95,7 +107,12 @@ namespace Tests.PlayMode
             
             // Random value range checks;
             Assert.That(newBalloon.number, Is.InRange(0, 7));
-            Assert.That(newBalloon.transform.rotation.eulerAngles.z, Is.InRange(0f, 5f));
+            float z = newBalloon.transform.rotation.eulerAngles.z;
+            if (z > 180f)
+            {
+                z -= 360f;
+            }
+            Assert.That(z, Is.InRange(-5f, 5f));
             Assert.That(newBalloon.rotationSpeed, Is.InRange(0f, 0.05f));
             Assert.That(newBalloon.moveSpeed, Is.InRange(0f, 0.1f));
             

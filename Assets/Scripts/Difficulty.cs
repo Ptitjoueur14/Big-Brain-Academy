@@ -17,7 +17,7 @@ public class Difficulty : MonoBehaviour
 
     private void Awake()
     {
-        DifficultyLevel = currentDifficulty; 
+        //DifficultyLevel = currentDifficulty; 
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

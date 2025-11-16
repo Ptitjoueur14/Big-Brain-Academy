@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using Assert = NUnit.Framework.Assert;
 
-namespace Tests.EditMode
+namespace BalloonTests
 {
     public class BalloonComparisonTests
     {

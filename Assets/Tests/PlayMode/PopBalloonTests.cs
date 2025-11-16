@@ -3,7 +3,7 @@ using Games.Maths;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Tests.PlayMode
+namespace BalloonBurstTests
 {
     public class PopBalloonTests
     {

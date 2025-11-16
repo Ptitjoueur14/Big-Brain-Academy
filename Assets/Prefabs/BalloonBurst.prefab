@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   balloonsParent: {fileID: 0}
   balloons: []
-  lastPoppedBalloon: {fileID: 0}
+  lastPoppedBalloonNumber: -100
   balloonPrefab: {fileID: 1823599495287523442, guid: a03ec2ef6456cb848abb04968b0483db, type: 3}
   totalBalloons: 0
   balloonCount: 0
@@ -65,3 +65,9 @@ MonoBehaviour:
   minY: -4
   maxY: 4
   minDistanceBetweenBalloons: 1
+  balloonColors:
+  - {fileID: 78591708107887540, guid: 0ed6f94c7dea75441be8b141c3724fbf, type: 3}
+  - {fileID: 1869206001679912078, guid: e2945c714a9fed1479e46b43892e4b85, type: 3}
+  - {fileID: -881977938478338131, guid: e74ae4cf5bbb0244e9107a21a3dcab6c, type: 3}
+  - {fileID: -5954656271944968290, guid: 4407d725e2159ca44b1dc7d490ecda43, type: 3}
+  - {fileID: 1865150617901574286, guid: 571116b29efb34e478f72e2e2d99bac0, type: 3}

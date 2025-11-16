@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6521220096519034204}
-  - component: {fileID: 355331241072685268}
   - component: {fileID: 5467331207259188694}
+  - component: {fileID: 250533205086806969}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -33,19 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &355331241072685268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4199817581393359996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63164a54cfa7f0144896f4db0a00ad04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  difficultyLevel: 3
 --- !u!114 &5467331207259188694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,3 +45,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792c4b61ec864c88b1c4944aca4c66e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficultyLevel: 0
+  gameCategory: 2
+  levelsSolved: 0
+  levelsSolvedText: {fileID: 0}
+--- !u!114 &250533205086806969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199817581393359996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09e597d8acd442280ebaa3132fe5ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameTimer: 0
+  currentLevelTimer: 0
+  previousLevelTimer: 0
+  gameTimerText: {fileID: 0}
+  currentLevelTimerText: {fileID: 0}
+  previousLevelTimerText: {fileID: 0}
