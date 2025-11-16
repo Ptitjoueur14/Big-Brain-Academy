@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792c4b61ec864c88b1c4944aca4c66e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyLevel: 0
+  difficultyLevel: 3
   gameCategory: 2
   levelsSolved: 0
   levelsSolvedText: {fileID: 0}
+  wrongClicks: 0
+  wrongClicksText: {fileID: 0}
 --- !u!114 &250533205086806969
 MonoBehaviour:
   m_ObjectHideFlags: 0

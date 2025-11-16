@@ -36,17 +36,36 @@ namespace BalloonBurstTests
             GameObject prefab = new GameObject("BalloonPrefab");
             prefab.AddComponent<Rigidbody2D>();
             
-            BalloonBurst.balloonPrefab = prefab.AddComponent<Balloon>();
+            Balloon balloon = prefab.AddComponent<Balloon>();
+            BalloonBurst.balloonPrefab = balloon;
             
-            SpriteRenderer graphics = prefab.AddComponent<SpriteRenderer>();
-            BalloonBurst.balloonPrefab.graphics = graphics;
+            SpriteRenderer renderer = prefab.AddComponent<SpriteRenderer>();
+            renderer.sprite = Sprite.Create(new Texture2D(5, 5), new Rect(0, 0, 5, 5), new Vector2(0.5f, 0.5f));
+            balloon.graphics = renderer;
             
-            graphics.sprite = Sprite.Create(new Texture2D(5, 5), new Rect(0, 0, 5, 5), new Vector2(0.5f, 0.5f));
-            BalloonBurst.balloonColors = new List<Sprite> { graphics.sprite };
+            BalloonBurst.balloonColors = new List<Sprite> { renderer.sprite };
+            
+            GameObject number= new GameObject("NumberText");
+            number.transform.SetParent(prefab.transform);
+            TextMeshProUGUI numberText = number.AddComponent<TextMeshProUGUI>();
+            balloon.numberText = numberText;
+            
+            //Fractions
+            balloon.fractionNumberParent = new GameObject("Fraction Parent");
+            balloon.fractionNumberParent.transform.SetParent(prefab.transform);
+            
+            balloon.fractionUpText = new GameObject("FractionUp").AddComponent<TextMeshProUGUI>();
+            balloon.fractionMiddleText = new GameObject("FractionMiddle").AddComponent<TextMeshProUGUI>();
+            balloon.fractionDownText = new GameObject("FractionDown").AddComponent<TextMeshProUGUI>();
+            balloon.negativeSignText = new GameObject("NegativeSign").AddComponent<TextMeshProUGUI>();
+            
+            balloon.fractionUpText.transform.SetParent(balloon.fractionNumberParent.transform); 
+            balloon.fractionMiddleText.transform.SetParent(balloon.fractionNumberParent.transform); 
+            balloon.fractionDownText.transform.SetParent(balloon.fractionNumberParent.transform); 
+            balloon.negativeSignText.transform.SetParent(balloon.fractionNumberParent.transform); 
 
-            GameObject textObj = new GameObject("NumberText");
-            textObj.transform.parent = prefab.transform;
-            TMP_Text text = textObj.AddComponent<TextMeshPro>();
+            BalloonBurst.maxFractionNumber = 9;
+            BalloonBurst.fractionProportion = 0.3f;
             
             BalloonBurst.balloons.Clear();
             BalloonBurst.balloonCount = 0;
@@ -87,7 +106,7 @@ namespace BalloonBurstTests
                 z -= 360f;
             }
             Assert.That(z, Is.InRange(-5f, 5f));
-            Assert.That(newBalloon.rotationSpeed, Is.InRange(0f, 0.05f));
+            Assert.That(newBalloon.rotationSpeed, Is.InRange(-0.05f, 0.05f));
             Assert.That(newBalloon.moveSpeed, Is.InRange(0f, 0.1f));
 
             Object.DestroyImmediate(newBalloon);
@@ -113,7 +132,7 @@ namespace BalloonBurstTests
                 z -= 360f;
             }
             Assert.That(z, Is.InRange(-5f, 5f));
-            Assert.That(newBalloon.rotationSpeed, Is.InRange(0f, 0.05f));
+            Assert.That(newBalloon.rotationSpeed, Is.InRange(-0.05f, 0.05f));
             Assert.That(newBalloon.moveSpeed, Is.InRange(0f, 0.1f));
             
             bool impossibleBalloon = BalloonBurst.SpawnBalloon();

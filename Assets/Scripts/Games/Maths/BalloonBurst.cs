@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,10 +9,10 @@ namespace Games.Maths
 {
     public class BalloonBurst : MonoBehaviour
     {
+        [Header("Balloons")]
         public GameObject balloonsParent;
         public List<Balloon> balloons;
-        //public int? LastPoppedBalloonNumber = -100; // The number of the last correct balloon popped by the player
-        public int lastPoppedBalloonNumber = -100;
+        public float lastPoppedBalloonNumber = -100; // The number of the last correct balloon popped by the player*
         public Balloon balloonPrefab; // Balloon prefab to instantiate
     
         [Header("Total Balloons Count")]
@@ -38,8 +39,7 @@ namespace Games.Maths
         public float minMoveSpeed;
         public float maxMoveSpeed; // Max move speed of the balloon
         
-        [Header("Balloon Spawn Settings")]
-        // Spawn bounds of ballons
+        [Header("Balloon Spawn Settings")] // Spawn bounds of ballons
         public float minX;
         public float maxX;
         public float minY;
@@ -48,6 +48,10 @@ namespace Games.Maths
         
         [Header("Balloon Colors")]
         public List<Sprite> balloonColors;
+
+        [Header("Expert Settings")] 
+        public int maxFractionNumber; // The max denominator number of a fraction in an Expert balloon
+        public float fractionProportion; // The chance of a balloon being a fraction number
         
         void Awake()
         {
@@ -212,7 +216,39 @@ namespace Games.Maths
                     Quaternion.Euler(0, 0, randomRotationAngle), 
                     balloonsParent.transform
                     );
-                balloon.number = GetRandomNumber(minNumber, maxNumber);
+                // Expert Mode : Chance of spawning a fraction number balloon
+                if (Difficulty.DifficultyLevel is DifficultyLevel.Expert && Random.NextDouble() < fractionProportion)
+                {
+                    balloon.isNumberFraction = true;
+                    balloon.fractionUpNumber = GetRandomNumber(1, maxFractionNumber);
+                    balloon.fractionDownNumber = GetRandomNumber(2, maxFractionNumber);
+                    bool isFractionNegative = Random.Next(0, 2) == 0;
+                    if (isFractionNegative)
+                    {
+                        balloon.number = -balloon.CalculateFraction();
+                    }
+                    else
+                    {
+                        balloon.number = balloon.CalculateFraction();
+                    }
+                    balloon.fractionUpText.text = balloon.fractionUpNumber.ToString();
+                    balloon.fractionDownText.text = balloon.fractionDownNumber.ToString();
+                    balloon.numberText.gameObject.SetActive(false); // Hide normal number
+                    balloon.fractionNumberParent.gameObject.SetActive(true); // Show fraction
+                    if (isFractionNegative)
+                    {
+                        balloon.negativeSignText.gameObject.SetActive(true); // Show the negative sign on the left of the negative fraction
+                    }
+                }
+                else
+                {
+                    balloon.isNumberFraction = false;
+                    balloon.number = GetRandomNumber(minNumber, maxNumber);
+                    balloon.numberText.text = balloon.number.ToString("N0");
+                    balloon.numberText.gameObject.SetActive(true); // Show normal number
+                    balloon.fractionNumberParent.gameObject.SetActive(false); // Hide fraction
+                }
+                
                 balloon.balloonIndex = balloonCount + 1;
                 balloon.name = balloon.ToString();
                 
@@ -268,8 +304,8 @@ namespace Games.Maths
             {
                 return false;
             }
-
-            if (PopBalloon(hitBalloon) && AreAllBalloonsPopped()) // All balloons popped : Restart game
+            bool isPopCorrect = PopBalloon(hitBalloon);
+            if (isPopCorrect && AreAllBalloonsPopped()) // All balloons popped : Restart game
             {
                 lastPoppedBalloonNumber = -100;
                 SpawnAllBalloons(); //FIX
@@ -278,6 +314,10 @@ namespace Games.Maths
                 GameManager.Instance.IncreaseLevelsSolved(); //Increment levels solved counter
                 Debug.Log($"Time taken to solve level : {timer.DisplayTimer(timer.currentLevelTimer)}. Total time : {timer.DisplayTimer(timer.gameTimer)}. Levels solved : {GameManager.Instance.levelsSolved}");
                 timer.UpdateLevelTimers();
+            }
+            else if (!isPopCorrect) // Wrong Pop : Increment Wrong Clicks (error clicks)
+            {
+                GameManager.Instance.IncreaseWrongClicks();
             }
             return true;
         }

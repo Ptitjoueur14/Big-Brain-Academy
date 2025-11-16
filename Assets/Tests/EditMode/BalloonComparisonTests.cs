@@ -32,5 +32,17 @@ namespace BalloonTests
             Assert.IsTrue(balloon2 > balloon1);
             Assert.IsFalse(balloon1 > balloon2);
         }
+        
+        [Test] 
+        public void CalculateFraction()
+        {
+            Balloon expertBalloon = new GameObject().AddComponent<Balloon>();
+            expertBalloon.fractionUpNumber = 2;
+            expertBalloon.fractionDownNumber = 3;
+            Assert.AreEqual(0.66f, expertBalloon.CalculateFraction(), 0.01f);
+            
+            Object.DestroyImmediate(expertBalloon);
+        }
+
     }
 }

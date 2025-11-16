@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public int levelsSolved;
     public TMP_Text levelsSolvedText;
 
+    [Header("Game Statistics")] 
+    public int wrongClicks;
+    public TMP_Text wrongClicksText;
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -31,5 +35,11 @@ public class GameManager : MonoBehaviour
     {
         levelsSolved++;
         levelsSolvedText.text = levelsSolved.ToString();
+    }
+    
+    public void IncreaseWrongClicks()
+    {
+        wrongClicks++;
+        wrongClicksText.text = wrongClicks.ToString();
     }
 }

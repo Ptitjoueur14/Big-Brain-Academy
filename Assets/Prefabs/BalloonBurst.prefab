@@ -71,3 +71,5 @@ MonoBehaviour:
   - {fileID: -881977938478338131, guid: e74ae4cf5bbb0244e9107a21a3dcab6c, type: 3}
   - {fileID: -5954656271944968290, guid: 4407d725e2159ca44b1dc7d490ecda43, type: 3}
   - {fileID: 1865150617901574286, guid: 571116b29efb34e478f72e2e2d99bac0, type: 3}
+  maxFractionNumber: 9
+  fractionProportion: 0.3

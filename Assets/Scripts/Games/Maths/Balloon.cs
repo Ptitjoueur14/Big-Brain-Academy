@@ -9,7 +9,7 @@ namespace Games.Maths
     {
         [Header("Balloon")]
         public int balloonIndex; // The index of the balloon in the list of balloons of the BalloonBurst
-        public int number; //The number shown on the balloon -> balloon value
+        public float number; //The number shown on the balloon -> balloon value
         
         [Header("Movement Settings")]
         public float moveSpeed;
@@ -19,6 +19,16 @@ namespace Games.Maths
         [Header("Collision Settings")]
         public float collisionRadius = 0.5f;   // Approximate radius of balloon for collision
         public float collisionPush = 0.1f;     // How much to separate on collision
+        
+        [Header("Expert Settings")]
+        public bool isNumberFraction; // If the number displayed is a fraction
+        public int fractionUpNumber; // The numerator of the fraction
+        public int fractionDownNumber; // The denominator of the fraction
+        public GameObject fractionNumberParent; // The parent of the fraction GameObjects
+        public TMP_Text fractionUpText; 
+        public TMP_Text fractionDownText;
+        public TMP_Text fractionMiddleText; // The fraction separator (ex : "-----")
+        public TMP_Text negativeSignText; // The negative sign if the fraction is negative
 
         public Rigidbody2D rb;
         
@@ -29,9 +39,10 @@ namespace Games.Maths
         public TMP_Text numberText;
         
         private Camera cam;
+        
         public Vector2 moveDirection;
         
-        private static List<Balloon> allBalloons = new List<Balloon>();
+        private static List<Balloon> allBalloons = new List<Balloon>(); // The list of surrounding balloons
         
         private void Awake()
         {
@@ -40,7 +51,7 @@ namespace Games.Maths
 
         private void Start()
         {
-            Random = new System.Random(number);
+            Random = new System.Random((int)number);
             float angle = Random.Next(0, 360);
             moveDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)).normalized;
             
@@ -49,7 +60,6 @@ namespace Games.Maths
             {
                 numberText = GetComponentInChildren<TMP_Text>();
             }
-            numberText.text = number.ToString();
         } 
         
         private void OnEnable() => allBalloons.Add(this);
@@ -145,13 +155,17 @@ namespace Games.Maths
 
         public override string ToString()
         {
-            return "Balloon " + balloonIndex + ": Number " + number;
+            string res = "Balloon " + balloonIndex + ": Number " + number;
+            if (isNumberFraction)
+            {
+                res += " (" + fractionUpNumber + " / " + fractionDownNumber + ")";
+            }
+            return res;
         }
 
-        private void OnDrawGizmos()
+        public float CalculateFraction()
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawIcon(transform.position, number.ToString(), true);
+            return (float) fractionUpNumber / fractionDownNumber;
         }
     }
 }
