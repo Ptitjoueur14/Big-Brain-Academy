@@ -10,40 +10,51 @@ namespace Games.Maths
     {
         public GameObject balloonsParent;
         public List<Balloon> balloons;
-        public Balloon lastPoppedBalloon; // Last correct balloon popped by the player
+        //public int? LastPoppedBalloonNumber = -100; // The number of the last correct balloon popped by the player
+        public int lastPoppedBalloonNumber = -100;
         public Balloon balloonPrefab; // Balloon prefab to instantiate
     
+        [Header("Total Balloons Count")]
         public int totalBalloons;
         public int balloonCount; // The current balloon count of the game
         
         public System.Random Random;
         
+        [Header("Balloon Count Interval")]
         public int minBalloonCount;
         public int maxBalloonCount; // Max number of balloons depending on difficulty
         
+        [Header("Balloon Number Interval")]
         public int minNumber;
         public int maxNumber; // Max number value depending on difficulty
 
+        [Header("Balloon Rotation Interval")]
         public int minRotation;
         public int maxRotation; // Max rotation angle on spawn in degrees
         public float minRotationSpeed;
         public float maxRotationSpeed; // Max rotation speed of the balloon
         
+        [Header("Balloon Movement Speed Interval")]
         public float minMoveSpeed;
         public float maxMoveSpeed; // Max move speed of the balloon
         
+        [Header("Balloon Spawn Settings")]
         // Spawn bounds of ballons
         public float minX;
         public float maxX;
         public float minY;
         public float maxY;
-        
         public float minDistanceBetweenBalloons;
         
         void Awake()
         {
-            Random = new System.Random((int)Difficulty.DifficultyLevel); // Random to assign random values to balloon fields
-            switch (Difficulty.DifficultyLevel)
+            Random = new System.Random(DateTime.Now.Millisecond); // Random to assign random values to balloon fields
+        }
+        
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        private void Start()
+        {
+             switch (Difficulty.DifficultyLevel) 
             {
                 case DifficultyLevel.Easy: // 3-4 balloons with values [0;7]
                     minBalloonCount = 3;
@@ -53,7 +64,7 @@ namespace Games.Maths
                     minRotation = 0;
                     maxRotation = 5;
                     minRotationSpeed = 0f;
-                    maxRotationSpeed = 0.05f;
+                    maxRotationSpeed = 1f;
                     minMoveSpeed = 0f;
                     maxMoveSpeed = 0.1f;
                     break;
@@ -64,8 +75,8 @@ namespace Games.Maths
                     maxNumber = 30;
                     minRotation = 5;
                     maxRotation = 20;
-                    minRotationSpeed = 0.05f;
-                    maxRotationSpeed = 0.2f;
+                    minRotationSpeed = 0.5f;
+                    maxRotationSpeed = 2f;
                     minMoveSpeed = 0.05f;
                     maxMoveSpeed = 0.2f;
                     break;
@@ -76,8 +87,8 @@ namespace Games.Maths
                     maxNumber = 50;
                     minRotation = 7;
                     maxRotation = 50;
-                    minRotationSpeed = 0.1f;
-                    maxRotationSpeed = 0.4f;
+                    minRotationSpeed = 1f;
+                    maxRotationSpeed = 4f; 
                     minMoveSpeed = 0.1f;
                     maxMoveSpeed = 0.4f;
                     break;
@@ -88,18 +99,14 @@ namespace Games.Maths
                     maxNumber = 99;
                     minRotation = 20;
                     maxRotation = 180;
-                    minRotationSpeed = 0.3f;
-                    maxRotationSpeed = 0.5f;
+                    minRotationSpeed = 3f;
+                    maxRotationSpeed = 6f;
                     minMoveSpeed = 0.3f;
                     maxMoveSpeed = 0.5f;
                     break;
             }
+            
             totalBalloons = Random.Next(minBalloonCount, maxBalloonCount + 1);
-        }
-        
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        private void Start()
-        {
             SpawnAllBalloons();
         }
 
@@ -213,6 +220,7 @@ namespace Games.Maths
             {
                 SpawnBalloon();
             }
+            
             PrintAllBalloons(); // Print all balloons with their numbers
         }
 
@@ -237,43 +245,37 @@ namespace Games.Maths
             {
                 return false;
             }
-            return PopBalloon(hitBalloon);
+
+            if (PopBalloon(hitBalloon) && AreAllBalloonsPopped())
+            {
+                lastPoppedBalloonNumber = -100;
+                SpawnAllBalloons(); //FIX
+            }
+            return true;
         }
         
         // Try to pop the balloon and return true if it is correct (balloons popped in ascending order)
         public bool PopBalloon(Balloon balloon)
         {
-            // First balloon : Check if it's the minimum in the list of balloons
-            if (!lastPoppedBalloon)
+            if (balloonCount == 0)
             {
-                Balloon minBalloon = balloons.OrderBy(b => b.number).First();
-                bool smallestBalloon = balloon.number == minBalloon.number;
-                if (!smallestBalloon)
-                {
-                    Debug.Log($"Failed to pop {balloon} because {minBalloon} is lower than it");
-                    return false;
-                }
+                return false;
             }
-            // Check if balloon is greater than previously popped balloon 
-            else 
-            {
-                if (balloon.number < lastPoppedBalloon.number)
-                {
-                    Debug.Log($"Failed to pop {balloon} because its number is lower than the one previously popped : {lastPoppedBalloon}");
-                    return false;
-                }
+            
+            Balloon minBalloon = balloons.OrderBy(b => b.number).First(); 
+            if (balloon != minBalloon) 
+            { 
+                Debug.Log($"Failed to pop {balloon} because {minBalloon} is lower than it"); 
+                return false;
             }
 
             // Balloon number is greater than the previous one : Destroy balloon
             Debug.Log($"Popped {balloon}");
-            lastPoppedBalloon = balloon;
+            lastPoppedBalloonNumber= balloon.number;
             balloons.Remove(balloon);
             Destroy(balloon.gameObject);
-
-            if (AreAllBalloonsPopped()) // put ts somewhere else (click)
-            {
-                //SpawnAllBalloons(); FIX
-            }
+            balloonCount--;
+            
             return true;
         }
         
@@ -291,6 +293,4 @@ namespace Games.Maths
             Debug.Log(result);
         }
     }
-    
-    
 }

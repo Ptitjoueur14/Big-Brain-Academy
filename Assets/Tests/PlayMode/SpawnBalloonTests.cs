@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Games.Maths;
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
 
 namespace Tests.PlayMode
@@ -19,6 +20,10 @@ namespace Tests.PlayMode
             BalloonBurst.minBalloonCount = 3;
             BalloonBurst.maxBalloonCount = 4;
             BalloonBurst.balloonCount = 0;
+            BalloonBurst.totalBalloons = 3;
+
+            BalloonBurst.minNumber = 0;
+            BalloonBurst.maxNumber = 7;
 
             BalloonBurst.minX = -5; BalloonBurst.maxX = 5;
             BalloonBurst.minY = -5; BalloonBurst.maxY = 5;
@@ -29,7 +34,15 @@ namespace Tests.PlayMode
             BalloonBurst.minRotationSpeed = 0; BalloonBurst.maxRotationSpeed = 0.05f;
             
             GameObject prefab = new GameObject("BalloonPrefab");
+            prefab.AddComponent<Rigidbody2D>();
             BalloonBurst.balloonPrefab = prefab.AddComponent<Balloon>();
+            
+            GameObject textObj = new GameObject("NumberText");
+            textObj.transform.parent = prefab.transform;
+            TMP_Text text = textObj.AddComponent<TextMeshPro>();
+            
+            BalloonBurst.balloons.Clear();
+            BalloonBurst.balloonCount = 0;
             
             BalloonBurst.balloonsParent = new GameObject("Parent");
         }
@@ -39,8 +52,11 @@ namespace Tests.PlayMode
         {
             if (BalloonBurst != null)
             {
-                // Clean up the GameObject after each test
                 Object.DestroyImmediate(BalloonBurst.gameObject);
+                if (BalloonBurst.balloonPrefab != null)
+                    Object.DestroyImmediate(BalloonBurst.balloonPrefab.gameObject);
+                if (BalloonBurst.balloonsParent != null)
+                    Object.DestroyImmediate(BalloonBurst.balloonsParent);
             }
         }
 
@@ -70,13 +86,14 @@ namespace Tests.PlayMode
         {
             // Act
             BalloonBurst.SpawnAllBalloons();
-            Balloon newBalloon = BalloonBurst.balloons[2];
 
             // Assert
+            Assert.That(BalloonBurst.totalBalloons, Is.InRange(3, 4));
             Assert.AreEqual(BalloonBurst.totalBalloons, BalloonBurst.balloons.Count);
+            Assert.Greater(BalloonBurst.balloons.Count, 1);
+            Balloon newBalloon = BalloonBurst.balloons[1];
             
             // Random value range checks;
-            Assert.That(BalloonBurst.totalBalloons, Is.InRange(3, 4));
             Assert.That(newBalloon.number, Is.InRange(0, 7));
             Assert.That(newBalloon.transform.rotation.eulerAngles.z, Is.InRange(0f, 5f));
             Assert.That(newBalloon.rotationSpeed, Is.InRange(0f, 0.05f));

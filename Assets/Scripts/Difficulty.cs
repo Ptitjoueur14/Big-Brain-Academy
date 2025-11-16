@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum DifficultyLevel
@@ -9,7 +10,16 @@ public enum DifficultyLevel
 }
 public class Difficulty : MonoBehaviour
 {
-    public static DifficultyLevel DifficultyLevel = DifficultyLevel.Easy;
+    [Header("Set Difficulty in Inspector")]
+    public DifficultyLevel currentDifficulty;
+    
+    public static DifficultyLevel DifficultyLevel { get; set; }
+
+    private void Awake()
+    {
+        DifficultyLevel = currentDifficulty; 
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
