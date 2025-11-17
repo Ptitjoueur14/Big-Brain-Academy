@@ -10,11 +10,14 @@ namespace Games.Maths
         [Header("Balloon")]
         public int balloonIndex; // The index of the balloon in the list of balloons of the BalloonBurst
         public float number; //The number shown on the balloon -> balloon value
+        public TMP_Text numberText;
         
         [Header("Movement Settings")]
+        public Rigidbody2D rb;
         public float moveSpeed;
         public float rotationSpeed;
         public float screenPadding = 0.1f;  // Optional extra space from borders
+        public Vector2 moveDirection;
         
         [Header("Collision Settings")]
         public float collisionRadius = 0.5f;   // Approximate radius of balloon for collision
@@ -29,26 +32,23 @@ namespace Games.Maths
         public TMP_Text fractionDownText;
         public TMP_Text fractionMiddleText; // The fraction separator (ex : "-----")
         public TMP_Text negativeSignText; // The negative sign if the fraction is negative
-
-        public Rigidbody2D rb;
         
+        [Header("Pop Effect")]
+        public ParticleSystem popEffect; // The particle to play when the balloon is popped
+        
+        [Header("Balloon Color")]
         public SpriteRenderer graphics;
+        public Color balloonColor;
         
-        public System.Random Random;
-        
-        public TMP_Text numberText;
-        
+        private System.Random Random;
         private Camera cam;
-        
-        public Vector2 moveDirection;
-        
         private static List<Balloon> allBalloons = new List<Balloon>(); // The list of surrounding balloons
         
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
         }
-
+        
         private void Start()
         {
             Random = new System.Random((int)number);

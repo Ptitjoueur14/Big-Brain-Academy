@@ -10,11 +10,7 @@ public enum DifficultyLevel
 }
 public class Difficulty : MonoBehaviour
 {
-    [Header("Set Difficulty in Inspector")]
-    public DifficultyLevel currentDifficulty;
-    
-    public static DifficultyLevel DifficultyLevel { get; set; }
-
+    public static DifficultyLevel DifficultyLevel;
     private void Awake()
     {
         //DifficultyLevel = currentDifficulty; 

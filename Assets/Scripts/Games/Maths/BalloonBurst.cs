@@ -14,12 +14,12 @@ namespace Games.Maths
         public List<Balloon> balloons;
         public float lastPoppedBalloonNumber = -100; // The number of the last correct balloon popped by the player*
         public Balloon balloonPrefab; // Balloon prefab to instantiate
+        
+        private System.Random Random;
     
         [Header("Total Balloons Count")]
         public int totalBalloons;
         public int balloonCount; // The current balloon count of the game
-        
-        public System.Random Random;
         
         [Header("Balloon Count Interval")]
         public int minBalloonCount;
@@ -48,6 +48,7 @@ namespace Games.Maths
         
         [Header("Balloon Colors")]
         public List<Sprite> balloonColors;
+        public List<Color> colors;
 
         [Header("Expert Settings")] 
         public int maxFractionNumber; // The max denominator number of a fraction in an Expert balloon
@@ -105,7 +106,7 @@ namespace Games.Maths
                     minNumber = -99;
                     maxNumber = 99;
                     minRotation = 20;
-                    maxRotation = 60;
+                    maxRotation = 55;
                     minRotationSpeed = 2f;
                     maxRotationSpeed = 5f;
                     minMoveSpeed = 0.3f;
@@ -255,6 +256,8 @@ namespace Games.Maths
                 // Balloon has a random color in the list of colors
                 int randomColorIndex = Random.Next(balloonColors.Count);
                 balloon.graphics.sprite = balloonColors[randomColorIndex];
+                balloon.balloonColor = colors[randomColorIndex];
+                
                 
                 balloon.rotationSpeed = GetRandomSpeed(minRotationSpeed, maxRotationSpeed);
                 balloon.moveSpeed = GetRandomSpeed(minMoveSpeed, maxMoveSpeed);
@@ -341,10 +344,22 @@ namespace Games.Maths
             //Debug.Log($"Popped {balloon}");
             lastPoppedBalloonNumber= balloon.number;
             balloons.Remove(balloon);
+            SpawnPopEffect(balloon);
             Destroy(balloon.gameObject);
             balloonCount--;
             
             return true;
+        }
+        
+        // Spawns the balloon popEFfect particle when popped
+        public void SpawnPopEffect(Balloon balloon)
+        {
+            if (balloon.popEffect != null)
+            {
+                ParticleSystem ps = Instantiate(balloon.popEffect, balloon.transform.position, Quaternion.identity);
+                ParticleSystem.MainModule main = ps.main;
+                main.startColor = new ParticleSystem.MinMaxGradient(balloon.balloonColor);
+            }
         }
         
         public void PrintAllBalloons()

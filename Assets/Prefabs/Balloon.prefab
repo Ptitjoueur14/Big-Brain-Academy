@@ -1079,6 +1079,8 @@ MonoBehaviour:
   fractionDownText: {fileID: 4381856259326632219}
   fractionMiddleText: {fileID: 4081862734536490565}
   negativeSignText: {fileID: 7350730589807208395}
+  balloonColor: {r: 0, g: 0, b: 0, a: 0}
+  popEffect: {fileID: 8562436621524865612, guid: ba5fdbe2100159c4ba258e0aac1884e8, type: 3}
   rb: {fileID: 1035806641082921621}
   graphics: {fileID: 3542226001277168131}
   numberText: {fileID: 3217792166492793395}
