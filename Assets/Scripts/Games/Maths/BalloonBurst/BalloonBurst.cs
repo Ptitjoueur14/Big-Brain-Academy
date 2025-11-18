@@ -54,7 +54,7 @@ namespace Games.Maths
         public int maxFractionNumber; // The max denominator number of a fraction in an Expert balloon
         public float fractionProportion; // The chance of a balloon being a fraction number
         
-        void Awake()
+        private void Awake()
         {
             Random = new System.Random(DateTime.Now.Millisecond); // Random to assign random values to balloon fields
         }
@@ -118,7 +118,7 @@ namespace Games.Maths
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse))
             {
@@ -351,7 +351,7 @@ namespace Games.Maths
             return true;
         }
         
-        // Spawns the balloon popEFfect particle when popped
+        // Spawns the balloon popEffect particle when popped
         public void SpawnPopEffect(Balloon balloon)
         {
             if (balloon.popEffect != null)

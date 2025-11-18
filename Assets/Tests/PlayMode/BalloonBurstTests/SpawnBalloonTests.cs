@@ -44,6 +44,7 @@ namespace BalloonBurstTests
             balloon.graphics = renderer;
             
             BalloonBurst.balloonColors = new List<Sprite> { renderer.sprite };
+            BalloonBurst.colors = new List<Color> { renderer.color };
             
             GameObject number= new GameObject("NumberText");
             number.transform.SetParent(prefab.transform);
