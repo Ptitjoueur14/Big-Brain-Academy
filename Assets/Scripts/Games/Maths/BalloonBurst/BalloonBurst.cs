@@ -116,8 +116,7 @@ namespace Games.Maths
             
             SpawnAllBalloons();
         }
-
-        // Update is called once per frame
+        
         private void Update()
         {
             if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse))
@@ -315,7 +314,6 @@ namespace Games.Maths
                 
                 Timer timer = GameManager.Instance.GetComponent<Timer>();
                 GameManager.Instance.IncreaseLevelsSolved(); //Increment levels solved counter
-                Debug.Log($"Time taken to solve level : {timer.DisplayTimer(timer.currentLevelTimer)}. Total time : {timer.DisplayTimer(timer.gameTimer)}. Levels solved : {GameManager.Instance.levelsSolved}");
                 timer.UpdateLevelTimers();
             }
             else if (!isPopCorrect) // Wrong Pop : Increment Wrong Clicks (error clicks)

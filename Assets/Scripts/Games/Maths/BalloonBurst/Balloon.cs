@@ -16,12 +16,12 @@ namespace Games.Maths
         public Rigidbody2D rb;
         public float moveSpeed;
         public float rotationSpeed;
-        public float screenPadding = 0.1f;  // Optional extra space from borders
         public Vector2 moveDirection;
         
         [Header("Collision Settings")]
         public float collisionRadius = 0.5f;   // Approximate radius of balloon for collision
         public float collisionPush = 0.1f;     // How much to separate on collision
+        public float screenPadding = 0.3f;  // Optional extra space from borders
         
         [Header("Expert Settings")]
         public bool isNumberFraction; // If the number displayed is a fraction
@@ -60,10 +60,17 @@ namespace Games.Maths
             {
                 numberText = GetComponentInChildren<TMP_Text>();
             }
-        } 
-        
-        private void OnEnable() => allBalloons.Add(this);
-        private void OnDisable() => allBalloons.Remove(this);
+        }
+
+        private void OnEnable()
+        {
+            allBalloons.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            allBalloons.Remove(this);
+        }
 
         private void FixedUpdate()
         {

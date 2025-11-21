@@ -30,22 +30,21 @@ namespace MalletMathTests
         }
 
         [Test]
-        public void RemoveRandomNumberBlocksTest()
+        public void RemoveRandomBlocksTest()
         {
             Difficulty.DifficultyLevel = DifficultyLevel.Easy;
             MalletMath.minNumberBlockNumber = 1;
             MalletMath.maxNumberBlockNumber = 4;
             MalletMath.minNumberBlockRemoveCount = 1;
             MalletMath.maxNumberBlockRemoveCount = 4;
-
-            int blocksCount = 4;
+            
             List<int> numberBlocks = new List<int> { 1, 3, 2, 4 };
             MalletMath.GetNumberBlockList(numberBlocks);
-            MalletMath.RemoveRandomNumberBlocks();
-            MalletMath.PrintALlNumberBlocks(MalletMath.numberBlocks);
+            MalletMath.RemoveRandomBlocks();
+            MalletMath.PrintAllNumberBlocks(MalletMath.numberBlocks);
             Debug.Log($"Removed {MalletMath.numberBlockRemoveCount} blocks");
             Assert.AreEqual(MalletMath.numberBlockRemoveCount, MalletMath.numberBlocks.Count - MalletMath.currentNumberBlocks.Count);
-            MalletMath.PrintALlNumberBlocks(MalletMath.currentNumberBlocks);
+            MalletMath.PrintAllNumberBlocks(MalletMath.currentNumberBlocks);
             
         }
     }

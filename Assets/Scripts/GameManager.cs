@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     {
         levelsSolved++;
         levelsSolvedText.text = levelsSolved.ToString();
+        Timer timer = Instance.GetComponent<Timer>();
+        Debug.Log($"Time taken to solve level : {timer.DisplayTimer(timer.currentLevelTimer)}. Total time : {timer.DisplayTimer(timer.gameTimer)}. Levels solved : {GameManager.Instance.levelsSolved}");
     }
     
     public void IncreaseWrongClicks()
