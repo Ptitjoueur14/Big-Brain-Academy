@@ -53,7 +53,7 @@ namespace Games.Maths.ColorCount
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                animator.speed = 2;
+                animator.speed = 1.5f;
             }
             else if (Input.GetKeyUp(KeyCode.Space))
             {

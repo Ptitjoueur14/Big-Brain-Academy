@@ -159,6 +159,10 @@ namespace Games.Maths.ColorCount
             totalBallsCount = Random.Next(minBallsCount, maxBallsCount + 1);
             StartCoroutine(SpawnAllBalls());
             areBallsSpawning = true;
+            if (!isSpedUp)
+            {
+                currentBallSpawnSpeed = ballSpawnSpeed;
+            }
         }
 
         public void OnBlueButtonClicked()
