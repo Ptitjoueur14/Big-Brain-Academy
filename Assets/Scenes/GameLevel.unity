@@ -571,6 +571,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50dc0aed3c294f4eb43ffd18acd2e49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5525453907422808123 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2236333403768879979, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+  m_PrefabInstance: {fileID: 6458120127183370236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f8109dd51b54e919fc0871e6c880745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5874280315941829565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -671,6 +682,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7368937834379391951, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5525453907422808123}
     - target: {fileID: 8499902267755721366, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -679,6 +694,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 8998127957904524690, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -873,7 +892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5467331207259188694, guid: c6eb5d00a03c3b2488a787e539ab30dd, type: 3}
       propertyPath: difficultyLevel
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5467331207259188694, guid: c6eb5d00a03c3b2488a787e539ab30dd, type: 3}
       propertyPath: wrongClicksText

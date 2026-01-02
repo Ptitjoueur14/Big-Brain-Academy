@@ -50,7 +50,13 @@ namespace Games.Maths.TickTockTurn
             {
                 clockDirection = ClockDirection.Backward;
             }
+            GetRandomTime();
 
+            displayTimeText.text = DisplayTimeToTurn();
+        }
+
+        public void GetRandomTime()
+        {
             switch (Difficulty.DifficultyLevel) // Pick a random time from the list of that difficulty
             {
                 case DifficultyLevel.Easy: // Can go up to 120 minutes (2h)
@@ -66,8 +72,6 @@ namespace Games.Maths.TickTockTurn
                     timeToTurn = expertTimesList[Random.Next(0, expertTimesList.Count)];
                     break;
             }
-
-            displayTimeText.text = DisplayTimeToTurn();
         }
 
         // Convert the time in minutes to a time in hours and minutes
@@ -98,6 +102,35 @@ namespace Games.Maths.TickTockTurn
                 return result += $"de {time.Minutes}m !";
             }
             return result += $"de {time.Hours}h {time.Minutes}m !";
+        }
+
+        public void OnValidateButtonClicked()
+        {
+            if (currentTime == timeToTurn)
+            {
+                GameManager.Win();
+            }
+            else
+            {
+                GameManager.Lose();
+            }
+            ResetLevel();
+        }
+
+        public void ResetLevel()
+        {
+            if (Random.Next(0, 2) == 0)
+            {
+                clockDirection = ClockDirection.Forward;
+            }
+            else
+            {
+                clockDirection = ClockDirection.Backward;
+            }
+
+            GetRandomTime();
+
+            displayTimeText.text = DisplayTimeToTurn();
         }
     }
 }
