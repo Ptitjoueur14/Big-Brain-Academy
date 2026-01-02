@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -62,7 +61,7 @@ namespace Games.Maths.MalletMath
                     maxNumberBlockNumber = 5;
                     minNumberBlockRemoveCount = 1;
                     maxNumberBlockRemoveCount = 2;
-                    numberBlocksHeight = 2;
+                    numberBlocksHeight = 2f;
                     blockPrefab = blockPrefabBig;
                     break;
                 case DifficultyLevel.Medium: // 4-5 blocks with numbers [1;7]
@@ -153,7 +152,8 @@ namespace Games.Maths.MalletMath
             for (int i = 0; i < numberList.Count; i++)
             {
                 // TODO : Get position of block
-                Vector3 blockPosition = new Vector3(0, -4 + i * numberBlocksHeight, 0);
+                Vector3 blockPosition = new Vector3(0, -3.9f + i * numberBlocksHeight, 0);
+                Debug.Log($"Spawned block {i} at Y = {-3.9f + i * numberBlocksHeight}");
                 NumberBlock numberBlock = Instantiate(blockPrefab, blockPosition, Quaternion.identity, blocksParent.transform);
                 
                 numberBlock.number = numberList[i];
