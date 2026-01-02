@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Games.Maths.ColorCount
 {
@@ -45,6 +46,18 @@ namespace Games.Maths.ColorCount
             else
             {
                 sr.sprite = blueBallSprite;
+            }
+        }
+        
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                animator.speed = 2;
+            }
+            else if (Input.GetKeyUp(KeyCode.Space))
+            {
+                animator.speed = 1;
             }
         }
 

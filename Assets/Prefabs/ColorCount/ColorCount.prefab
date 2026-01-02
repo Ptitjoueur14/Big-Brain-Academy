@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2447019608901809
+--- !u!1 &8845417495073073013
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6243947336692906783}
-  - component: {fileID: 1302363488636479426}
+  - component: {fileID: 7312455672911485725}
+  - component: {fileID: 8141668977354433833}
   m_Layer: 0
   m_Name: ColorCount
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6243947336692906783
+--- !u!4 &7312455672911485725
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2447019608901809}
+  m_GameObject: {fileID: 8845417495073073013}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1302363488636479426
+--- !u!114 &8141668977354433833
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2447019608901809}
+  m_GameObject: {fileID: 8845417495073073013}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50dc0aed3c294f4eb43ffd18acd2e49c, type: 3}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballsParent: {fileID: 0}
   colorBalls: []
-  ballPrefab: {fileID: 0}
+  ballPrefab: {fileID: 4687494236865564037, guid: c72cf298e56c66346b945af8831e5dbd, type: 3}
   totalBallsCount: 0
   currentBallCount: 0
   redBallCount: 0
@@ -57,3 +57,12 @@ MonoBehaviour:
   currentBallSpawnSpeed: 0
   areBallsSpawning: 0
   isSpedUp: 0
+  colorButtonsParent: {fileID: 0}
+  colorButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  colorCountsParent: {fileID: 0}
+  blueCountText: {fileID: 0}
+  redCountText: {fileID: 0}
+  colorCountShowDuration: 0.5

@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 using Random = System.Random;
 
 namespace Games.Maths.ColorCount
@@ -32,12 +35,25 @@ namespace Games.Maths.ColorCount
         
         [Header("Color Buttons")]
         public GameObject colorButtonsParent;
+        public List<Button> colorButtons;
+
+        [Header("Color Count Texts")] 
+        public GameObject colorCountsParent;
+        public TMP_Text blueCountText;
+        public TMP_Text redCountText;
+        public float colorCountShowDuration; // The amount of seconds color counts show before winning or losing
         
         private Random Random = new (DateTime.Now.Millisecond);
 
         private void Start()
         {
             colorButtonsParent.SetActive(false);
+            colorCountsParent.SetActive(false);
+            foreach (Button button in colorButtons)
+            {
+                button.interactable = true;
+            }
+            
             ballSpawnSpeed = 0.5f;
             switch (Difficulty.DifficultyLevel)
             {
@@ -67,12 +83,12 @@ namespace Games.Maths.ColorCount
 
         private void Update()
         {
-            if (areBallsSpawning && Input.GetMouseButtonDown((int) MouseButton.LeftMouse))
+            if (areBallsSpawning && Input.GetKey(KeyCode.Space))
             {
                 isSpedUp = true;
                 currentBallSpawnSpeed = ballSpawnSpeed / 2;
             }
-            else if (areBallsSpawning && !Input.GetMouseButtonDown((int) MouseButton.LeftMouse))
+            else if (areBallsSpawning && Input.GetKeyUp(KeyCode.Space))
             {
                 isSpedUp = false;
                 currentBallSpawnSpeed = ballSpawnSpeed;
@@ -125,11 +141,17 @@ namespace Games.Maths.ColorCount
         public void RestartLevel()
         {
             colorButtonsParent.SetActive(false);
+            colorCountsParent.SetActive(false);
             foreach (ColorBall ball in colorBalls)
             {
                 Destroy(ball.gameObject);
             }
             colorBalls.Clear();
+            
+            foreach (Button button in colorButtons)
+            {
+                button.interactable = true;
+            }
             
             currentBallCount = 0;
             blueBallCount = 0;
@@ -141,58 +163,77 @@ namespace Games.Maths.ColorCount
 
         public void OnBlueButtonClicked()
         {
+            foreach (Button button in colorButtons)
+            {
+                button.interactable = false;
+            }
+            
             ShowBallCounts();
             if (blueBallCount > redBallCount)
             {
-                Win();
+                StartCoroutine(Win());
             }
             else
             {
-                Lose();
+                StartCoroutine(Lose());
             }
         }
 
         public void OnRedButtonClicked()
         {
+            foreach (Button button in colorButtons)
+            {
+                button.interactable = false;
+            }
+            
             ShowBallCounts();
             if (redBallCount > blueBallCount)
             {
-                Win();
+                StartCoroutine(Win());
             }
             else
             {
-                Lose();
+                StartCoroutine(Lose());
             }
         }
 
         public void OnEqualButtonClicked()
         {
+            foreach (Button button in colorButtons)
+            {
+                button.interactable = false;
+            }
+            
             ShowBallCounts();
             if (redBallCount == blueBallCount)
             {
-                Win();
+                StartCoroutine(Win());
             }
             else
             {
-                Lose();
+                StartCoroutine(Lose());
             }
         }
 
-        public void Win()
+        public IEnumerator Win()
         {
-            RestartLevel();
             GameManager.Win();
+            yield return new WaitForSeconds(colorCountShowDuration);
+            RestartLevel();
         }
 
-        public void Lose()
+        public IEnumerator Lose()
         {
-            RestartLevel();
             GameManager.Lose();
+            yield return new WaitForSeconds(colorCountShowDuration);
+            RestartLevel();
         }
 
         public void ShowBallCounts()
         {
-            
+            colorCountsParent.SetActive(true);
+            blueCountText.text = blueBallCount.ToString();
+            redCountText.text = redBallCount.ToString();
         }
     }
 }
