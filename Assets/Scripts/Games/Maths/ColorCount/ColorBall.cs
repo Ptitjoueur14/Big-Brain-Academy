@@ -2,6 +2,12 @@ using UnityEngine;
 
 namespace Games.Maths.ColorCount
 {
+
+    public enum BallSpawnSide
+    {
+        LeftSide,
+        RightSide,
+    }
     public class ColorBall : MonoBehaviour
     {
         public int ballIndex; // The index of the ball in the list of balls
@@ -11,12 +17,27 @@ namespace Games.Maths.ColorCount
         public Sprite redBallSprite;
         public Sprite blueBallSprite;
         
-        public Rigidbody rb;
+        [Header("Ball Spawn Side")]
+        public BallSpawnSide ballSpawnSide; // The side of the screen where the ball spawns
+        public Vector2 ballSpawnPositionLeft;
+        public Vector2 ballSpawnPositionRight;
+        
+        //public Rigidbody rb;
         public SpriteRenderer sr;
         public Animator animator;
 
         private void Start()
         {
+            if (ballSpawnSide == BallSpawnSide.LeftSide)
+            {
+                transform.position = ballSpawnPositionLeft;
+                animator.Play("BallMovementLeft");
+            }
+            else
+            {
+                transform.position = ballSpawnPositionRight;
+                animator.Play("BallMovementRight");
+            }
             if (ballColor == Color.red)
             {
                 sr.sprite = redBallSprite;
@@ -25,7 +46,6 @@ namespace Games.Maths.ColorCount
             {
                 sr.sprite = blueBallSprite;
             }
-            animator.Play("BallMovementAnimation");
         }
 
         public override string ToString()

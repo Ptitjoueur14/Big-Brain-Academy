@@ -44,4 +44,16 @@ public class GameManager : MonoBehaviour
         wrongClicks++;
         wrongClicksText.text = wrongClicks.ToString();
     }
+
+    public static void Win()
+    {
+        Timer timer = Instance.GetComponent<Timer>();
+        Instance.IncreaseLevelsSolved(); //Increment levels solved counter
+        timer.UpdateLevelTimers();
+    }
+
+    public static void Lose()
+    {
+        Instance.IncreaseWrongClicks();
+    }
 }

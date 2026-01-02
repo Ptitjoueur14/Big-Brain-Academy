@@ -13,12 +13,12 @@ namespace Games.Maths.ColorCount
         public GameObject ballsParent;
         public List<ColorBall> colorBalls;
         public ColorBall ballPrefab;
-        public int redBallCount;
-        public int blueBallCount;
 
         [Header("Balls Count")] 
         public int totalBallsCount;
         public int currentBallCount;
+        public int redBallCount;
+        public int blueBallCount;
 
         [Header("Balls Count Interval")] 
         public int minBallsCount;
@@ -30,22 +30,27 @@ namespace Games.Maths.ColorCount
         public bool areBallsSpawning;
         public bool isSpedUp; // If the player speeds up the ball spawning phase by holding left click
         
+        [Header("Color Buttons")]
+        public GameObject colorButtonsParent;
+        
         private Random Random = new (DateTime.Now.Millisecond);
 
         private void Start()
         {
+            colorButtonsParent.SetActive(false);
+            ballSpawnSpeed = 0.5f;
             switch (Difficulty.DifficultyLevel)
             {
-                case DifficultyLevel.Easy: // 4-5 balls
-                    minBallsCount = 4;
+                case DifficultyLevel.Easy: // 3-5 balls
+                    minBallsCount = 3;
                     maxBallsCount = 5;
                     break;
-                case DifficultyLevel.Medium: // 6-8 balls
-                    minBallsCount = 6;
-                    maxBallsCount = 8;
+                case DifficultyLevel.Medium: // 5-7 balls
+                    minBallsCount = 5;
+                    maxBallsCount = 7;
                     break;
-                case DifficultyLevel.Hard: // 9-12 balls
-                    minBallsCount = 9;
+                case DifficultyLevel.Hard: // 8-12 balls
+                    minBallsCount = 8;
                     maxBallsCount = 12;
                     break;
                 case DifficultyLevel.Expert: // 10-14 balls
@@ -53,6 +58,7 @@ namespace Games.Maths.ColorCount
                     maxBallsCount = 14;
                     break;
             }
+            
             totalBallsCount = Random.Next(minBallsCount, maxBallsCount + 1);
             StartCoroutine(SpawnAllBalls());
             areBallsSpawning = true;
@@ -82,7 +88,9 @@ namespace Games.Maths.ColorCount
             }
             areBallsSpawning = false;
             isSpedUp = false;
-            ShowColorChoiceButtons();
+            
+            yield return new WaitForSeconds(currentBallSpawnSpeed);
+            colorButtonsParent.SetActive(true);
         }
 
         public void SpawnBall()
@@ -99,28 +107,92 @@ namespace Games.Maths.ColorCount
                 ball.ballColor = Color.blue;
                 blueBallCount++;
             }
+
+            if (Random.Next(0, 2) == 0)
+            {
+                ball.ballSpawnSide = BallSpawnSide.LeftSide;
+            }
+            else
+            {
+                ball.ballSpawnSide = BallSpawnSide.RightSide;
+            }
+
+            ball.name = ball.ToString();
             currentBallCount++;
             colorBalls.Add(ball);
         }
 
-        public void ShowColorChoiceButtons()
+        public void RestartLevel()
+        {
+            colorButtonsParent.SetActive(false);
+            foreach (ColorBall ball in colorBalls)
+            {
+                Destroy(ball.gameObject);
+            }
+            colorBalls.Clear();
+            
+            currentBallCount = 0;
+            blueBallCount = 0;
+            redBallCount = 0;
+            totalBallsCount = Random.Next(minBallsCount, maxBallsCount + 1);
+            StartCoroutine(SpawnAllBalls());
+            areBallsSpawning = true;
+        }
+
+        public void OnBlueButtonClicked()
+        {
+            ShowBallCounts();
+            if (blueBallCount > redBallCount)
+            {
+                Win();
+            }
+            else
+            {
+                Lose();
+            }
+        }
+
+        public void OnRedButtonClicked()
+        {
+            ShowBallCounts();
+            if (redBallCount > blueBallCount)
+            {
+                Win();
+            }
+            else
+            {
+                Lose();
+            }
+        }
+
+        public void OnEqualButtonClicked()
+        {
+            ShowBallCounts();
+            if (redBallCount == blueBallCount)
+            {
+                Win();
+            }
+            else
+            {
+                Lose();
+            }
+        }
+
+        public void Win()
+        {
+            RestartLevel();
+            GameManager.Win();
+        }
+
+        public void Lose()
+        {
+            RestartLevel();
+            GameManager.Lose();
+        }
+
+        public void ShowBallCounts()
         {
             
-        }
-
-        public bool IsCorrectBlue()
-        {
-            return blueBallCount > redBallCount;
-        }
-
-        public bool IsCorrectRed()
-        {
-            return redBallCount > blueBallCount;
-        }
-
-        public bool IsCorrectEqual()
-        {
-            return blueBallCount == redBallCount;
         }
     }
 }
