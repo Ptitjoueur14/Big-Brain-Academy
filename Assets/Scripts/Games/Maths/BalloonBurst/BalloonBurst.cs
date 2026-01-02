@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Games.Maths
+namespace Games.Maths.BalloonBurst
 {
     public class BalloonBurst : MonoBehaviour
     {

@@ -190,6 +190,17 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 9068846913874336432, guid: 7d8c44c6e06581643bf305646c1f7bbc, type: 3}
   m_PrefabInstance: {fileID: 6028188113240743628}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &535585442 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1879260520815787772, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+  m_PrefabInstance: {fileID: 5874280315941829565}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ColorCount
       objectReference: {fileID: 0}
+    - target: {fileID: 4143037287025355373, guid: 279eefce3fc7e0d4f9014f70d426cf09, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5809439865281720848, guid: 279eefce3fc7e0d4f9014f70d426cf09, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.4739445
@@ -668,7 +683,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5090651226193882461, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 8998127957904524690, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 3247729081605040380, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
@@ -755,6 +770,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d8c44c6e06581643bf305646c1f7bbc, type: 3}
+--- !u!1001 &6458120127183370236
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1234385126776508468, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.4739445
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234385126776508468, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.73640513
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234385126776508468, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.054998025
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234385126776508468, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234385126776508468, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234385126776508468, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234385126776508468, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234385126776508468, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234385126776508468, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234385126776508468, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236333403768879979, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: displayTimeText
+      value: 
+      objectReference: {fileID: 535585442}
+    - target: {fileID: 9003042201911540194, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_Name
+      value: TickTockTurn
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
 --- !u!114 &6498535590996597456 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8813574607958040918, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
@@ -1057,5 +1133,6 @@ SceneRoots:
   - {fileID: 7307280988277208438}
   - {fileID: 7738991779228581894}
   - {fileID: 3118862474832920547}
+  - {fileID: 6458120127183370236}
   - {fileID: 5874280315941829565}
   - {fileID: 8837331073037118949}

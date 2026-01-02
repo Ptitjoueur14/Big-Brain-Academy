@@ -52,6 +52,8 @@ namespace Games.Maths.MalletMath
 
         private void Start()
         {
+            totalSumText.gameObject.SetActive(true);
+            
             switch (Difficulty.DifficultyLevel)
             {
                 case DifficultyLevel.Easy: // 3 blocks with numbers [1;4]
