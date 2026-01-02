@@ -288,9 +288,7 @@ namespace Games.Maths.MalletMath
         {
             if (currentSum == totalSum) // Goal sum reached -> Go to next level
             {
-                Timer timer = GameManager.Instance.GetComponent<Timer>();
-                GameManager.Instance.IncreaseLevelsSolved();
-                timer.UpdateLevelTimers();
+                GameManager.Win();
                 
                 RemoveAllNumberBlocks();
                 SpawnAllNumberBlocks(); // Start a new level
@@ -299,7 +297,7 @@ namespace Games.Maths.MalletMath
             if (!CanReach(totalSum, 0, 0))
             {
                 //Debug.Log($"Can't reach {totalSum} with the current blocks");
-                GameManager.Instance.IncreaseWrongClicks();
+                GameManager.Lose();
                 RemoveAllNumberBlocks();
                 SpawnAllNumberBlocks(); // Start a new level
                 return false;

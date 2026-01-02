@@ -165,6 +165,7 @@ namespace Games.Maths.ColorCount
             }
         }
 
+        // Runs this function when the Blue button is clicked
         public void OnBlueButtonClicked()
         {
             foreach (Button button in colorButtons)
@@ -183,6 +184,7 @@ namespace Games.Maths.ColorCount
             }
         }
 
+        // Runs this function when the Red button is clicked
         public void OnRedButtonClicked()
         {
             foreach (Button button in colorButtons)
@@ -201,6 +203,7 @@ namespace Games.Maths.ColorCount
             }
         }
 
+        // Runs this function when the Equal button is clicked
         public void OnEqualButtonClicked()
         {
             foreach (Button button in colorButtons)

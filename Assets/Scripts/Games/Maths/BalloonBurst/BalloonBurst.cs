@@ -311,13 +311,11 @@ namespace Games.Maths
                 lastPoppedBalloonNumber = -100;
                 SpawnAllBalloons(); //FIX
                 
-                Timer timer = GameManager.Instance.GetComponent<Timer>();
-                GameManager.Instance.IncreaseLevelsSolved(); //Increment levels solved counter
-                timer.UpdateLevelTimers();
+                GameManager.Win();
             }
             else if (!isPopCorrect) // Wrong Pop : Increment Wrong Clicks (error clicks)
             {
-                GameManager.Instance.IncreaseWrongClicks();
+                GameManager.Lose();
             }
             return true;
         }
