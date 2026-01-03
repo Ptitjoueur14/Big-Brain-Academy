@@ -737,7 +737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5467331207259188694, guid: c6eb5d00a03c3b2488a787e539ab30dd, type: 3}
       propertyPath: difficultyLevel
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5467331207259188694, guid: c6eb5d00a03c3b2488a787e539ab30dd, type: 3}
       propertyPath: wrongClicksText
@@ -1057,6 +1057,42 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6384777630642099326, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5733605852224427516, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8025278636425546460, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 520228359690749170, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 8701961684049431986, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1139505513666951875, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 6064303912371719492, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3515337243421792096, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2218004585121781406, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 6125658045721350498, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 7644332856689634781, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2276518782415132003, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4888054132568047515, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 8886856953190091761, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}

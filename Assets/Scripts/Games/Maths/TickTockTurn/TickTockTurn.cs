@@ -26,7 +26,7 @@ namespace Games.Maths.TickTockTurn
         public int currentTime;
         public int currentHour;
         public int currentMinute;
-        public int currentHourClockSector; // The sector of the clock the Hour segment is on
+        public float currentHourClockSector; // The sector of the clock the Hour hand is on (can be between two sectors)
         public int currentMinuteClockSector; // The sector of the clock the Minute segment is on
         public ClockDirection clockDirection; // The direction to go in
         public TMP_Text displayTimeText;
@@ -72,12 +72,21 @@ namespace Games.Maths.TickTockTurn
                     timeToTurn = expertTimesList[Random.Next(0, expertTimesList.Count)];
                     break;
             }
+
+            if (clockDirection == ClockDirection.Backward)
+            {
+                timeToTurn = -timeToTurn;
+            }
         }
 
         // Convert the time in minutes to a time in hours and minutes
         public Time GetTime(int timeInMinutes)
         {
             Time time = new Time();
+            if (timeInMinutes < 0)
+            {
+                timeInMinutes = -timeInMinutes;
+            }
             time.TotalTime = timeInMinutes;
             time.Hours = timeInMinutes / 60;
             time.Minutes = timeInMinutes % 60;
