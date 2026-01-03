@@ -35,12 +35,12 @@ namespace Games.Maths.TickTockTurn
         public TMP_Text displayTimeText;
 
         [Header("Time Interval")] // The possible time in minutes for each difficulty
-        public List<int> easyTimesList = new (){ 5, 10, 15, 20, 30, 40, 45, 50, 60, 70, 75, 80, 90, 100, 120 };
+        public List<int> easyTimesList = new (){ 5, 10, 15, 20, 30, 40, 45, 50, 60, 65, 70, 75 };
         public List<int> mediumTimesList = new() { 25, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 180 };
         public List<int> hardTimesList = new() { 35, 55, 65, 85, 95, 105, 115, 125, 135, 145, 155, 165, 175, 185, 195, 205, 210, 240 };
         public List<int> expertTimesList = new() { 55, 85, 105, 125, 145, 165, 175, 180, 185, 190, 195, 200, 205, 210, 215, 220, 235, 240, 245, 250, 255, 260, 265, 270, 285, 295, 300, 305, 325, 360, 390, 420 };
         
-        private Random Random = new (DateTime.Now.Millisecond);
+        private Random Random = new (DateTime.Now.Millisecond); 
         
         private void Start()
         {
@@ -62,7 +62,7 @@ namespace Games.Maths.TickTockTurn
         {
             switch (Difficulty.DifficultyLevel) // Pick a random time from the list of that difficulty
             {
-                case DifficultyLevel.Easy: // Can go up to 120 minutes (2h)
+                case DifficultyLevel.Easy: // Can go up to 75 minutes (1h 15m)
                     timeToTurn = easyTimesList[Random.Next(0, easyTimesList.Count)];
                     break;
                 case DifficultyLevel.Medium: // Can go up to 180 minutes (3h)
