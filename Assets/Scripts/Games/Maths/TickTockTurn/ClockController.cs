@@ -12,6 +12,7 @@ namespace Games.Maths.TickTockTurn
         public TickTockTurn tickTockTurn;
         [Range(1, 12)]
         public int currentSector = 12;
+        public int previousSector = 12;
         public bool isDragging;
         
         private const float DegreesPerSector = 360f / 12f;
@@ -59,7 +60,13 @@ namespace Games.Maths.TickTockTurn
             {
                 return;
             }
+            
+            int deltaSectors = GetSectorDelta(currentSector, newSector);
+            int deltaMinutes = deltaSectors * 5;
+            tickTockTurn.turnedTime += deltaMinutes;
+            Debug.Log($"Added {deltaMinutes} time");
 
+            previousSector = currentSector;
             currentSector = newSector;
             ApplyRotation();
             SendTimeToGame();
@@ -83,6 +90,25 @@ namespace Games.Maths.TickTockTurn
             tickTockTurn.currentMinute = currentSector % 12 * 5;
             tickTockTurn.currentHour = currentSector % 12 / 12;
             tickTockTurn.currentTime = tickTockTurn.currentHour * 60 + tickTockTurn.currentMinute;
+        }
+        
+        // Returns the amount of sectors moved (left or right)
+        public int GetSectorDelta(int startSector, int endSector)
+        {
+            int sectorDelta = endSector - startSector;
+
+            if (startSector == 12 && endSector == 1)
+            {
+                sectorDelta = 1;
+            }
+            
+            else if (startSector == 1 && endSector == 12)
+            {
+                sectorDelta = -1;
+            }
+            
+            Debug.Log($"Moved the clock {startSector} -> {endSector} with sector delta: {sectorDelta}");
+            return sectorDelta;
         }
     }
 }

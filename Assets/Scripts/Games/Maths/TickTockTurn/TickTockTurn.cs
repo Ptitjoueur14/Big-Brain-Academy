@@ -23,9 +23,12 @@ namespace Games.Maths.TickTockTurn
     {
         [Header("Time")] 
         public int timeToTurn; // The time in minutes to modify on the clock (forward or backward)
-        public int currentTime;
+        public int currentTime; // The time displayed by the clock
+        public int turnedTime; // The amount of time the player turned the clock in this level
         public int currentHour;
         public int currentMinute;
+        
+        [Header("Clock Time")]
         public float currentHourClockSector; // The sector of the clock the Hour hand is on (can be between two sectors)
         public int currentMinuteClockSector; // The sector of the clock the Minute segment is on
         public ClockDirection clockDirection; // The direction to go in
@@ -115,7 +118,7 @@ namespace Games.Maths.TickTockTurn
 
         public void OnValidateButtonClicked()
         {
-            if (currentTime == timeToTurn)
+            if (turnedTime == timeToTurn)
             {
                 GameManager.Win();
             }
@@ -128,6 +131,7 @@ namespace Games.Maths.TickTockTurn
 
         public void ResetLevel()
         {
+            turnedTime = 0;
             if (Random.Next(0, 2) == 0)
             {
                 clockDirection = ClockDirection.Forward;
