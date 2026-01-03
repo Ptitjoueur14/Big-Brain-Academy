@@ -5,7 +5,7 @@ namespace Games.Maths
         BalloonBurst,
         MalletMath,
         ColorCount,
-        TickTockTurn // A special game only played in Brain Qui
+        TickTockTurn // A special game only played in Brain Quiz
     }
     
     public class Games
