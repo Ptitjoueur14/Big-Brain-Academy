@@ -66,12 +66,12 @@ public class Timer : MonoBehaviour
     {
         gameTimerText.text = DisplayTimer(gameTimer);
         currentLevelTimerText.text = DisplayTimer(currentLevelTimer);
-        previousLevelTimerText.text = DisplayTimer(previousLevelTimer);
     }
 
     public void UpdateLevelTimers()
     {
         previousLevelTimer = currentLevelTimer;
+        previousLevelTimerText.text = DisplayTimer(previousLevelTimer);
         currentLevelTimer = 0;
         UpdateTimerTexts();
     }

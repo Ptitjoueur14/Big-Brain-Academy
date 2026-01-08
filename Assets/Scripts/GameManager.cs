@@ -1,4 +1,5 @@
 using System;
+using Modes;
 using TMPro;
 using UnityEngine;
 public class GameManager : MonoBehaviour
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
             levelsSolvedText = GameObject.Find("LevelsSolvedText").GetComponent<TMP_Text>();
             wrongClicksText = GameObject.Find("WrongClicksText").GetComponent<TMP_Text>();
         }
+        
         levelsSolved++;
         levelsSolvedText.text = levelsSolved.ToString();
         Timer timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
@@ -53,19 +55,28 @@ public class GameManager : MonoBehaviour
             levelsSolvedText = GameObject.Find("LevelsSolvedText").GetComponent<TMP_Text>();
             wrongClicksText = GameObject.Find("WrongClicksText").GetComponent<TMP_Text>();
         }
+        
         wrongClicks++;
         wrongClicksText.text = wrongClicks.ToString();
     }
 
     public static void Win()
     {
+        Instance.IncreaseLevelsSolved(); //Increment levels solved counter
+        
         Timer timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
         timer.UpdateLevelTimers();
-        Instance.IncreaseLevelsSolved(); //Increment levels solved counter
+        
+        BrainMass brainMass = GameObject.FindGameObjectWithTag("BrainMass").GetComponent<BrainMass>();
+        brainMass.SpawnBrainCloud();
     }
 
     public static void Lose()
     {
         Instance.IncreaseWrongClicks();
+        
+        BrainMass brainMass = GameObject.FindGameObjectWithTag("BrainMass").GetComponent<BrainMass>();
+        brainMass.RestartBrainMassDecrease();
+        
     }
 }

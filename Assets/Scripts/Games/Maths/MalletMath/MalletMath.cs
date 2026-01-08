@@ -123,7 +123,7 @@ namespace Games.Maths.MalletMath
             for (int i = 0; i < blocksCount; i++)
             {
                 int number;
-                if (Difficulty.DifficultyLevel == DifficultyLevel.Expert)
+                if (GameManager.Instance.difficultyLevel == DifficultyLevel.Expert)
                 {
                     if (Random.NextDouble() < negativeProportion) // Negative number
                     {
