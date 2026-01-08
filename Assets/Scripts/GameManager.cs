@@ -1,5 +1,6 @@
 using System;
 using Modes;
+using Modes.Stretching;
 using TMPro;
 using UnityEngine;
 public class GameManager : MonoBehaviour
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Game Settings")]
     public DifficultyLevel difficultyLevel;
+    public GameMode gameMode;
     public GameCategory gameCategory;
     public GameLevel gameLevel;
     
@@ -68,6 +70,11 @@ public class GameManager : MonoBehaviour
         timer.UpdateLevelTimers();
         
         BrainMass brainMass = GameObject.FindGameObjectWithTag("BrainMass").GetComponent<BrainMass>();
+        if (Instance.gameMode == GameMode.Stretching)
+        {
+            Debug.Log($"Added mass {brainMass.brainMassNumber}");
+            brainMass.stretching.AddBrainMass(brainMass.brainMassNumber);
+        }
         brainMass.SpawnBrainCloud();
     }
 

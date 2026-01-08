@@ -1,8 +1,7 @@
-using System;
 using TMPro;
 using UnityEngine;
 
-namespace Modes
+namespace Modes.Stretching
 {
     public class BrainCloud : MonoBehaviour
     {

@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-namespace Modes
+namespace Modes.Stretching
 {
     public class BrainMass : MonoBehaviour
     {
@@ -13,7 +10,7 @@ namespace Modes
         public BrainCloud mediumCloudPrefab;
         public BrainCloud bigCloudPrefab;
         public Vector2 brainCloudSpawnPosition;
-
+ 
         [Header("Brain Mass")]
         public int brainMassNumber;
         public bool isBrainMassDecreasing;
@@ -26,6 +23,9 @@ namespace Modes
         [Header("Brain Cloud Settings")] 
         public int bigCloudMinMass;
         public int mediumCloudMinMass;
+        
+        [Header("Class References")]
+        public Stretching stretching;
         
         private void Start()
         {

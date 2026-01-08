@@ -102,14 +102,14 @@ namespace Games.Maths.BalloonBurst
                 case DifficultyLevel.Expert: // 7-8 balloons with numbers [-99;99]
                     minBalloonCount = 7;
                     maxBalloonCount = 8;
-                    minNumber = -99;
-                    maxNumber = 99;
-                    minRotation = 20;
+                    minNumber = -50;
+                    maxNumber = 50;
+                    minRotation = 10;
                     maxRotation = 55;
                     minRotationSpeed = 2f;
                     maxRotationSpeed = 5f;
                     minMoveSpeed = 0.3f;
-                    maxMoveSpeed = 0.8f;
+                    maxMoveSpeed = 0.5f;
                     break;
             }
             
@@ -216,11 +216,17 @@ namespace Games.Maths.BalloonBurst
                     balloonsParent.transform
                     );
                 // Expert Mode : Chance of spawning a fraction number balloon
-                if (Difficulty.DifficultyLevel is DifficultyLevel.Expert && Random.NextDouble() < fractionProportion)
+                if (GameManager.Instance.difficultyLevel is DifficultyLevel.Expert && Random.NextDouble() < fractionProportion)
                 {
                     balloon.isNumberFraction = true;
                     balloon.fractionUpNumber = GetRandomNumber(1, maxFractionNumber);
                     balloon.fractionDownNumber = GetRandomNumber(2, maxFractionNumber);
+                    while (balloons.Any(balloonList => balloonList.isNumberFraction && balloonList.fractionUpNumber == balloon.fractionUpNumber && balloonList.fractionDownNumber == balloon.fractionDownNumber))
+                    {
+                        balloon.fractionUpNumber = GetRandomNumber(1, maxFractionNumber);
+                        balloon.fractionDownNumber = GetRandomNumber(2, maxFractionNumber);
+                    }
+                    
                     bool isFractionNegative = Random.Next(0, 2) == 0;
                     if (isFractionNegative)
                     {
@@ -230,6 +236,7 @@ namespace Games.Maths.BalloonBurst
                     {
                         balloon.number = balloon.CalculateFraction();
                     }
+                    
                     balloon.fractionUpText.text = balloon.fractionUpNumber.ToString();
                     balloon.fractionDownText.text = balloon.fractionDownNumber.ToString();
                     balloon.numberText.gameObject.SetActive(false); // Hide normal number

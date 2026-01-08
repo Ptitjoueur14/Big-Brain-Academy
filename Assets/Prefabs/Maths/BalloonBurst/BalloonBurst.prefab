@@ -110,7 +110,7 @@ MonoBehaviour:
   - {r: 0.81960785, g: 0.27843142, b: 0.71671873, a: 1}
   - {r: 0.81960785, g: 0.30112112, b: 0.27843142, a: 1}
   - {r: 0.81492096, g: 0.81960785, b: 0.27843142, a: 1}
-  maxFractionNumber: 9
+  maxFractionNumber: 5
   fractionProportion: 0.3
 --- !u!1 &7584833838106960421
 GameObject:
