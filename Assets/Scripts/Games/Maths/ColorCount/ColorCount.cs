@@ -31,6 +31,8 @@ namespace Games.Maths.ColorCount
         public bool areBallsSpawning;
         public bool isSpedUp; // If the player speeds up the ball spawning phase by holding left click
         
+        [Header("UI Elements")] 
+        public GameObject UIParent;
         [Header("Color Buttons")]
         public GameObject colorButtonsParent;
         public List<Button> colorButtons;
@@ -45,6 +47,7 @@ namespace Games.Maths.ColorCount
 
         private void Start()
         {
+            UIParent.SetActive(true);
             colorButtonsParent.SetActive(false);
             colorCountsParent.SetActive(false);
             foreach (Button button in colorButtons)

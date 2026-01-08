@@ -23,6 +23,7 @@ namespace Games.Maths.TickTockTurn
         [Header("Time")] 
         public int timeToTurn; // The time in minutes to add/remove on the clock
         public int turnedTime; // The time in minutes the player turned the clock in this level
+        public TMP_Text timeToTurnText;
         
         [Header("Clock Time")]
         public float currentHourClockSector; // The sector of the clock the Hour hand is on (can be between two sectors)
@@ -36,13 +37,13 @@ namespace Games.Maths.TickTockTurn
         public List<int> expertTimesList = new() { 55, 85, 105, 125, 145, 165, 175, 180, 185, 190, 195, 200, 205, 210, 215, 220, 235, 240, 245, 250, 255, 260, 265, 270, 285, 295, 300, 305, 325, 360, 390, 420 };
         
         [Header("UI Elements")]
-        public TMP_Text timeToTurnText;
-        public GameObject validateButton;
+        public GameObject UIParent;
         
         private Random Random = new (DateTime.Now.Millisecond); 
         
         private void Start()
         {
+            UIParent.SetActive(true);
             timeToTurnText.gameObject.SetActive(true);
             if (Random.Next(0, 2) == 0)
             {

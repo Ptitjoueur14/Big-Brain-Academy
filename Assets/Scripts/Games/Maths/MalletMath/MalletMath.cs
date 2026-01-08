@@ -48,10 +48,14 @@ namespace Games.Maths.MalletMath
         public List<Sprite> numberBlockColors;
         public List<Color> colors;
         
+        [Header("UI Parent")]
+        public GameObject UIParent;
+        
         private Random Random = new(DateTime.Now.Millisecond);
 
         private void Start()
         {
+            UIParent.SetActive(true);
             totalSumText.gameObject.SetActive(true);
             
             switch (GameManager.Instance.difficultyLevel)

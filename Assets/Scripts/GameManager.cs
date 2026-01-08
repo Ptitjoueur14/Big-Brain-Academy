@@ -40,10 +40,9 @@ public class GameManager : MonoBehaviour
             levelsSolvedText = GameObject.Find("LevelsSolvedText").GetComponent<TMP_Text>();
             wrongClicksText = GameObject.Find("WrongClicksText").GetComponent<TMP_Text>();
         }
-        
         levelsSolved++;
         levelsSolvedText.text = levelsSolved.ToString();
-        Timer timer = Instance.GetComponent<Timer>();
+        Timer timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
         Debug.Log($"Time taken to solve level : {timer.DisplayTimer(timer.currentLevelTimer)}. Total time : {timer.DisplayTimer(timer.gameTimer)}. Levels solved : {GameManager.Instance.levelsSolved}");
     }
     
@@ -54,16 +53,15 @@ public class GameManager : MonoBehaviour
             levelsSolvedText = GameObject.Find("LevelsSolvedText").GetComponent<TMP_Text>();
             wrongClicksText = GameObject.Find("WrongClicksText").GetComponent<TMP_Text>();
         }
-        
         wrongClicks++;
         wrongClicksText.text = wrongClicks.ToString();
     }
 
     public static void Win()
     {
-        Timer timer = Instance.GetComponent<Timer>();
-        Instance.IncreaseLevelsSolved(); //Increment levels solved counter
+        Timer timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
         timer.UpdateLevelTimers();
+        Instance.IncreaseLevelsSolved(); //Increment levels solved counter
     }
 
     public static void Lose()
