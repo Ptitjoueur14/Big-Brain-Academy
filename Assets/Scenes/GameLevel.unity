@@ -336,6 +336,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 11207215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1184664133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1184664135}
+  - component: {fileID: 1184664134}
+  m_Layer: 0
+  m_Name: StartLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1184664134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184664133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55341ce9e2a34f6d8ba4970ae662acc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelParents:
+  - {fileID: 7307280988277208439}
+  - {fileID: 7738991779228581895}
+  - {fileID: 3118862474832920548}
+  - {fileID: 6458120127183370237}
+  balloonBurst: {fileID: 7307280988277208439}
+  malletMath: {fileID: 7738991779228581895}
+  colorCount: {fileID: 3118862474832920548}
+  tickTockTurn: {fileID: 6458120127183370237}
+--- !u!4 &1184664135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184664133}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.517726, y: 0.23115678, z: 2.0552678}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1587736702
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,10 +509,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ColorCount
       objectReference: {fileID: 0}
-    - target: {fileID: 4143037287025355373, guid: 279eefce3fc7e0d4f9014f70d426cf09, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5809439865281720848, guid: 279eefce3fc7e0d4f9014f70d426cf09, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.4739445
@@ -505,6 +554,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 279eefce3fc7e0d4f9014f70d426cf09, type: 3}
+--- !u!1 &3118862474832920548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4143037287025355373, guid: 279eefce3fc7e0d4f9014f70d426cf09, type: 3}
+  m_PrefabInstance: {fileID: 3118862474832920547}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3807954837390670888 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6533190399908230478, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
@@ -677,12 +731,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2236333403768879979, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: timeToTurnText
+      value: 
+      objectReference: {fileID: 2478076055967048861}
+    - target: {fileID: 2236333403768879979, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
       propertyPath: displayTimeText
       value: 
       objectReference: {fileID: 2478076055967048861}
     - target: {fileID: 9003042201911540194, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
       propertyPath: m_Name
       value: TickTockTurn
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003042201911540194, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -725,6 +787,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+--- !u!1 &6458120127183370237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9003042201911540194, guid: 9b1aef17762c83544b2858f6dc29241e, type: 3}
+  m_PrefabInstance: {fileID: 6458120127183370236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6680817739455802852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -817,6 +884,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4976330552542254402}
+    - target: {fileID: 3728246763770495782, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3828207165479122497, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -896,10 +967,6 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 5467331207259188694, guid: c6eb5d00a03c3b2488a787e539ab30dd, type: 3}
-      propertyPath: difficultyLevel
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5467331207259188694, guid: c6eb5d00a03c3b2488a787e539ab30dd, type: 3}
       propertyPath: wrongClicksText
       value: 
       objectReference: {fileID: 4024037645798626868}
@@ -964,10 +1031,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BalloonBurst
       objectReference: {fileID: 0}
-    - target: {fileID: 735454398788503926, guid: a5d909cb299019745afe08b9bd17fc83, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3236856394035879571, guid: a5d909cb299019745afe08b9bd17fc83, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.4739445
@@ -1013,6 +1076,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5d909cb299019745afe08b9bd17fc83, type: 3}
+--- !u!1 &7307280988277208439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 735454398788503926, guid: a5d909cb299019745afe08b9bd17fc83, type: 3}
+  m_PrefabInstance: {fileID: 7307280988277208438}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7386159050472636472 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2983194660014679992, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
@@ -1051,10 +1119,6 @@ PrefabInstance:
     - target: {fileID: 1930706526451079535, guid: 992285205e3b07b48894e9cac49237da, type: 3}
       propertyPath: m_Name
       value: MalletMath
-      objectReference: {fileID: 0}
-    - target: {fileID: 1930706526451079535, guid: 992285205e3b07b48894e9cac49237da, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1944239450257716883, guid: 992285205e3b07b48894e9cac49237da, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1105,6 +1169,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 992285205e3b07b48894e9cac49237da, type: 3}
+--- !u!1 &7738991779228581895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1930706526451079535, guid: 992285205e3b07b48894e9cac49237da, type: 3}
+  m_PrefabInstance: {fileID: 7738991779228581894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8738060937295919488 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8530415028245263675, guid: 664f31ca62bb1e646a51b87035d73259, type: 3}
@@ -1187,3 +1256,4 @@ SceneRoots:
   - {fileID: 6458120127183370236}
   - {fileID: 6680817739455802852}
   - {fileID: 8837331073037118949}
+  - {fileID: 1184664135}

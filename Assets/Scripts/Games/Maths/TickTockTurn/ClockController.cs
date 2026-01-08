@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Games.Maths.TickTockTurn
@@ -7,29 +8,32 @@ namespace Games.Maths.TickTockTurn
         [Header("Clock Hands")]
         public Transform hourHand;
         public Transform minuteHand;
+        public float hourHandAngle;
+        public float minuteHandAngle;
 
         [Header("Clock Time")]
         public TickTockTurn tickTockTurn;
         [Range(1, 12)]
         public int currentSector = 12;
+        [Range(1, 12)]
         public int previousSector = 12;
         public bool isDragging;
         
         private const float DegreesPerSector = 360f / 12f;
         
-        void OnMouseDown()
+        private void OnMouseDown()
         {
             isDragging = true;
             Debug.Log("Clock clicked");
         }
 
-        void OnMouseUp()
+        private void OnMouseUp()
         {
             isDragging = false;
             Debug.Log("Clock released");
         }
 
-        void Update()
+        private void Update()
         {
             if (!isDragging)
                 return;
@@ -37,7 +41,7 @@ namespace Games.Maths.TickTockTurn
             UpdateClockFromMouse();
         }
 
-        private void UpdateClockFromMouse()
+        public void UpdateClockFromMouse()
         {
             Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = mouseWorld - transform.position;
@@ -72,24 +76,18 @@ namespace Games.Maths.TickTockTurn
             SendTimeToGame();
         }
 
-        private void ApplyRotation()
+        public void ApplyRotation()
         {
-            float zRotation = -(currentSector % 12 * DegreesPerSector);
-            minuteHand.localRotation = Quaternion.Euler(0, 0, zRotation);
-            hourHand.localRotation = Quaternion.Euler(0, 0, zRotation / 12f);
+            float angleMinutes = -(currentSector % 12 * DegreesPerSector);
+            minuteHand.localRotation = Quaternion.Euler(0, 0, angleMinutes);
+            
+            float angleHours = -(tickTockTurn.currentHourClockSector % 12 * DegreesPerSector);
+            hourHand.localRotation = Quaternion.Euler(0, 0, angleHours);
         }
 
-        private void SendTimeToGame()
+        public void SendTimeToGame()
         {
-            int minutes = currentSector % 12 * 5;
-            int hours = currentSector;
-            
             tickTockTurn.currentMinuteClockSector = currentSector;
-            tickTockTurn.currentHourClockSector = currentSector / 12f;
-
-            tickTockTurn.currentMinute = currentSector % 12 * 5;
-            tickTockTurn.currentHour = currentSector % 12 / 12;
-            tickTockTurn.currentTime = tickTockTurn.currentHour * 60 + tickTockTurn.currentMinute;
         }
         
         // Returns the amount of sectors moved (left or right)
@@ -108,7 +106,18 @@ namespace Games.Maths.TickTockTurn
             }
             
             Debug.Log($"Moved the clock {startSector} -> {endSector} with sector delta: {sectorDelta}");
+            UpdateClock(sectorDelta);
             return sectorDelta;
+        }
+
+        public void UpdateClock(int sectorDelta)
+        {
+            tickTockTurn.currentHourClockSector += (float) Math.Round(sectorDelta / 12f, 4);
+            float angle = sectorDelta * DegreesPerSector;
+            minuteHandAngle += (float) Math.Round(angle, 4);
+            hourHandAngle += (float) Math.Round(angle / 12f, 4);
+            minuteHandAngle %= 360;
+            hourHandAngle %= 360;
         }
     }
 }

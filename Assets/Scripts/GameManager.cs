@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 public class GameManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     public DifficultyLevel difficultyLevel;
     public GameCategory gameCategory;
+    public GameLevel gameLevel;
     
     [Header("Levels Solved")]
     public int levelsSolved;
@@ -33,6 +35,12 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseLevelsSolved()
     {
+        if (!levelsSolvedText || !wrongClicksText)
+        {
+            levelsSolvedText = GameObject.Find("LevelsSolvedText").GetComponent<TMP_Text>();
+            wrongClicksText = GameObject.Find("WrongClicksText").GetComponent<TMP_Text>();
+        }
+        
         levelsSolved++;
         levelsSolvedText.text = levelsSolved.ToString();
         Timer timer = Instance.GetComponent<Timer>();
@@ -41,6 +49,12 @@ public class GameManager : MonoBehaviour
     
     public void IncreaseWrongClicks()
     {
+        if (!levelsSolvedText || !wrongClicksText)
+        {
+            levelsSolvedText = GameObject.Find("LevelsSolvedText").GetComponent<TMP_Text>();
+            wrongClicksText = GameObject.Find("WrongClicksText").GetComponent<TMP_Text>();
+        }
+        
         wrongClicks++;
         wrongClicksText.text = wrongClicks.ToString();
     }

@@ -5,7 +5,7 @@ public enum GameCategory
     Identification,
     Memory,
     Maths,
-    Analyse, 
+    Analysis, 
     Perception
 }
 public class Category : MonoBehaviour

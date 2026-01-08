@@ -61,7 +61,7 @@ namespace Games.Maths.BalloonBurst
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
         {
-            switch (Difficulty.DifficultyLevel) 
+            switch (GameManager.Instance.difficultyLevel) 
             {
                 case DifficultyLevel.Easy: // 3-4 balloons with values [0;7]
                     minBalloonCount = 3;
@@ -308,16 +308,37 @@ namespace Games.Maths.BalloonBurst
             bool isPopCorrect = PopBalloon(hitBalloon);
             if (isPopCorrect && AreAllBalloonsPopped()) // All balloons popped : Restart game
             {
-                lastPoppedBalloonNumber = -100;
-                SpawnAllBalloons(); //FIX
-                
-                GameManager.Win();
+                Win();
             }
             else if (!isPopCorrect) // Wrong Pop : Increment Wrong Clicks (error clicks)
             {
-                GameManager.Lose();
+                Lose();
             }
             return true;
+        }
+
+        public void RestartLevel()
+        {
+            balloons.Clear();
+            balloonCount = 0;
+            lastPoppedBalloonNumber = -100;
+            SpawnAllBalloons();
+        }
+
+        public void Win()
+        {
+            GameManager.Win();
+            RestartLevel();
+        }
+
+        public void Lose()
+        {
+            GameManager.Lose();
+            foreach (Balloon balloon in balloons)
+            {
+                Destroy(balloon.gameObject);
+            }
+            RestartLevel();
         }
         
         // Try to pop the balloon and return true if it is correct (balloons popped in ascending order)

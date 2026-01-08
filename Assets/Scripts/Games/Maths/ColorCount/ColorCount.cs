@@ -53,7 +53,7 @@ namespace Games.Maths.ColorCount
             }
             
             ballSpawnSpeed = 0.5f;
-            switch (Difficulty.DifficultyLevel)
+            switch (GameManager.Instance.difficultyLevel)
             {
                 case DifficultyLevel.Easy: // 3-5 balls
                     minBallsCount = 3;
