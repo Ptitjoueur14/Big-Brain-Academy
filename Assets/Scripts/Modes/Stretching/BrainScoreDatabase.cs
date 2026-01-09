@@ -69,6 +69,7 @@ namespace Modes.Stretching
                     if (medal != MedalType.None && medal > difficultyScoreEntry.bestMedal)
                     {
                         Debug.Log($"New best medal for game {gameLevel} in difficulty {difficultyLevel} : {difficultyScoreEntry.bestMedal} -> {medal}");
+                        difficultyScoreEntry.bestMedal = medal;
                     }
                 }
             }
