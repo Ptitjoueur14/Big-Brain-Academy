@@ -6,11 +6,11 @@ namespace Modes.Stretching
 {
     public enum MedalType
     {
-        Platinum, // >= 400 g
-        Gold, // >= 300 g
-        Silver, // >= 200 g
-        Bronze, // >= 100 g
         None, // No medal
+        Bronze, // >= 100 g
+        Silver, // >= 200 g
+        Gold, // >= 300 g
+        Platinum, // >= 400 g
     }
     
     public class Stretching : MonoBehaviour
@@ -93,7 +93,7 @@ namespace Modes.Stretching
                     break;
                 case MedalType.Bronze:
                     break;
-                default: // No medals ( < 100 g)
+                case MedalType.None: // No medals ( < 100 g)
                     break;
             }
             

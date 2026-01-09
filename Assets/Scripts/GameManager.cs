@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject); 
         }
         
-        SaveSystem.Load(brainScoreDatabase);
+        //SaveSystem.Load(brainScoreDatabase);
     }
 
     public void IncreaseLevelsSolved()

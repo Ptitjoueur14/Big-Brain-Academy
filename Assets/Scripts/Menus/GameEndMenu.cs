@@ -34,8 +34,12 @@ namespace Menus
                 case MedalType.Bronze:
                     medalTypeText.color = new Color(1f, 0.5f, 0f);
                     break;
+                case MedalType.None:
+                    // TODO : Text for case None
+                    break;
             }
-            brainMassText.text = stretching.brainMass.ToString() + " g";
+            
+            brainMassText.text = stretching.brainMass + " g";
         }
 
         public void OnMainMenuButtonClicked()
