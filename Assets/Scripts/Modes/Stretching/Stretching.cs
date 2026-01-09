@@ -98,7 +98,7 @@ namespace Modes.Stretching
             }
             
             GameManager.Instance.brainScoreDatabase.RegisterScore(GameManager.Instance.gameLevel, GameManager.Instance.difficultyLevel, brainMass, obtainedMedal);
-            GameManager.Instance.Save();
+            GameManager.Instance.SaveDatabase();
             
             // Go to end scene
             DontDestroyOnLoad(gameObject);
