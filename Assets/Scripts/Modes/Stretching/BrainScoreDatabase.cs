@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Modes.Stretching
@@ -75,7 +76,22 @@ namespace Modes.Stretching
             }
         }
         
-        
-        
+        [CanBeNull]
+        public GameScoreEntry FindGameScoreEntry(GameLevel gameLevel)
+        {
+            return gameScores.Find(entry => entry.gameLevel == gameLevel);
+        }
+
+        [CanBeNull]
+        public DifficultyScoreEntry FindDifficultyScoreEntry(GameLevel gameLevel,
+            DifficultyLevel difficultyLevel)
+        {
+            GameScoreEntry gameScoreEntry = FindGameScoreEntry(gameLevel);
+            if (gameScoreEntry != null)
+            {
+                return gameScoreEntry.difficultyScores.Find(entry => entry.difficultyLevel == difficultyLevel);
+            }
+            return null;
+        }
     }
 }
