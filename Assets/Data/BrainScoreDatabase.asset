@@ -15,12 +15,43 @@ MonoBehaviour:
   gameScores:
   - gameLevel: 1
     difficultyScores:
-    - difficultyLevel: 0
-      bestBrainMass: 468
-      bestMedal: 0
     - difficultyLevel: 1
-      bestBrainMass: 414
-      bestMedal: 0
+      bestBrainMass: 472
+      bestMedal: 4
     - difficultyLevel: 2
-      bestBrainMass: 347
+      bestBrainMass: 435
+      bestMedal: 4
+    - difficultyLevel: 3
+      bestBrainMass: 359
+      bestMedal: 3
+    - difficultyLevel: 4
+      bestBrainMass: 137
       bestMedal: 1
+  - gameLevel: 2
+    difficultyScores:
+    - difficultyLevel: 1
+      bestBrainMass: 496
+      bestMedal: 4
+    - difficultyLevel: 2
+      bestBrainMass: 435
+      bestMedal: 4
+    - difficultyLevel: 3
+      bestBrainMass: 332
+      bestMedal: 3
+    - difficultyLevel: 4
+      bestBrainMass: 245
+      bestMedal: 2
+  - gameLevel: 3
+    difficultyScores:
+    - difficultyLevel: 1
+      bestBrainMass: 417
+      bestMedal: 4
+    - difficultyLevel: 2
+      bestBrainMass: 409
+      bestMedal: 4
+    - difficultyLevel: 3
+      bestBrainMass: 355
+      bestMedal: 3
+    - difficultyLevel: 4
+      bestBrainMass: 260
+      bestMedal: 2

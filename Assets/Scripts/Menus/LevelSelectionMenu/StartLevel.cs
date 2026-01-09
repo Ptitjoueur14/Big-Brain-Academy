@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Menus
+namespace Menus.LevelSelectionMenu
 {
     public class StartLevel : MonoBehaviour
     {

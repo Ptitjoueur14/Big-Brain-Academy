@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-namespace Menus
+namespace Menus.LevelSelectionMenu
 {
     public class LevelSelectionMenu : MonoBehaviour
     {
@@ -50,52 +47,12 @@ namespace Menus
 
         public void OnBackArrowButtonClicked()
         {
-            gameObject.SetActive(false);
-        }
-
-        public void OnEasyDifficultyButtonClicked()
-        {
-            GameManager.Instance.difficultyLevel = DifficultyLevel.Easy;
-        }
-        
-        public void OnMediumDifficultyButtonClicked()
-        {
-            GameManager.Instance.difficultyLevel = DifficultyLevel.Medium;
-        }
-        
-        public void OnHardDifficultyButtonClicked()
-        {
-            GameManager.Instance.difficultyLevel = DifficultyLevel.Hard;
-        }
-        
-        public void OnExpertDifficultyButtonClicked()
-        {
-            GameManager.Instance.difficultyLevel = DifficultyLevel.Expert;
+            SceneManager.LoadScene("MainMenu");
         }
 
         public void OnStartButtonClicked()
         {
             SceneManager.LoadScene("GameLevel");
-        }
-
-        public void OnBalloonBurstButtonClicked()
-        {
-            GameManager.Instance.gameLevel = GameLevel.BalloonBurst;
-        }
-        
-        public void OnMalletMathButtonClicked()
-        {
-            GameManager.Instance.gameLevel = GameLevel.MalletMath;
-        }
-        
-        public void OnColorCountButtonClicked()
-        {
-            GameManager.Instance.gameLevel = GameLevel.ColorCount;
-        }
-        
-        public void OnTickTockTurnButtonClicked()
-        {
-            GameManager.Instance.gameLevel = GameLevel.TickTockTurn;
         }
     }
 }

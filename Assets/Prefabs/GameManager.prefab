@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792c4b61ec864c88b1c4944aca4c66e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyLevel: 0
+  brainScoreDatabase: {fileID: 11400000, guid: 8f579f051392515478b62655f3213c04, type: 2}
+  difficultyLevel: 1
+  gameMode: 1
   gameCategory: 2
-  gameLevel: 0
+  gameLevel: 1
   levelsSolved: 0
   levelsSolvedText: {fileID: 0}
   wrongClicks: 0
