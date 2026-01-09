@@ -12,3 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b085aa21c4494d5a86adeb02ed66bb97, type: 3}
   m_Name: BrainScoreDatabase
   m_EditorClassIdentifier: 
+  gameScores:
+  - gameLevel: 1
+    difficultyScores:
+    - difficultyLevel: 0
+      bestBrainMass: 468
+      bestMedal: 0
+    - difficultyLevel: 1
+      bestBrainMass: 414
+      bestMedal: 0
+    - difficultyLevel: 2
+      bestBrainMass: 347
+      bestMedal: 1

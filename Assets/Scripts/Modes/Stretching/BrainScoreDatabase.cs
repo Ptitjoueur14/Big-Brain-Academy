@@ -7,6 +7,13 @@ namespace Modes.Stretching
     public class GameScoreEntry
     {
         public GameLevel gameLevel;
+        public List<DifficultyScoreEntry> difficultyScores = new();
+    }
+    
+    [System.Serializable]
+    public class DifficultyScoreEntry
+    {
+        public DifficultyLevel difficultyLevel;
         public int bestBrainMass;
         public MedalType bestMedal;
     }
@@ -16,33 +23,52 @@ namespace Modes.Stretching
     {
         public List<GameScoreEntry> gameScores = new();
 
-        public void RegisterScore(GameLevel gameLevel, int brainMass, MedalType medal)
+        public void RegisterScore(GameLevel gameLevel, DifficultyLevel difficultyLevel, int brainMass, MedalType medal)
         {
-            GameScoreEntry entry = gameScores.Find(entry => entry.gameLevel == gameLevel);
+            GameScoreEntry gameScoreEntry = gameScores.Find(entry => entry.gameLevel == gameLevel);
 
-            if (entry == null)
+            if (gameScoreEntry == null)
             {
-                GameScoreEntry gameScoreEntry = new GameScoreEntry
+                DifficultyScoreEntry newDifficultyScoreEntry = new DifficultyScoreEntry
                 {
-                    gameLevel = gameLevel,
+                    difficultyLevel = difficultyLevel,
                     bestBrainMass = brainMass,
                     bestMedal = medal,
                 };
-                Debug.Log($"New entry added for game {gameLevel} : new brain mass of {brainMass} g with new medal of {medal}");
-                gameScores.Add(gameScoreEntry);
+                GameScoreEntry newGameScoreEntry = new GameScoreEntry
+                {
+                    gameLevel = gameLevel,
+                };
+                newGameScoreEntry.difficultyScores.Add(newDifficultyScoreEntry);
+                Debug.Log($"New game entry added for game {gameLevel} in difficulty {difficultyLevel} : new brain mass of {brainMass} g with new medal of {medal}");
             }
 
             else
             {
-                if (brainMass > entry.bestBrainMass)
+                DifficultyScoreEntry difficultyScoreEntry = gameScoreEntry.difficultyScores.Find(entry => entry.difficultyLevel == difficultyLevel);
+                if (difficultyScoreEntry == null)
                 {
-                    Debug.Log($"New best brain mass for game {gameLevel} : {entry.bestBrainMass} g -> {brainMass} g");
-                    entry.bestBrainMass = brainMass;
+                    DifficultyScoreEntry newDifficultyScoreEntry = new DifficultyScoreEntry
+                    {
+                        difficultyLevel = difficultyLevel,
+                        bestBrainMass = brainMass,
+                        bestMedal = medal,
+                    };
+                    gameScoreEntry.difficultyScores.Add(newDifficultyScoreEntry);
+                    Debug.Log($"New difficulty entry added for game {gameLevel} in difficulty {difficultyLevel} : new brain mass of {brainMass} g with new medal of {medal}");
                 }
-
-                if (medal != MedalType.None && medal > entry.bestMedal)
+                else
                 {
-                    Debug.Log($"New best medal for game {gameLevel} : {entry.bestMedal} -> {medal}");
+                    if (brainMass > difficultyScoreEntry.bestBrainMass)
+                    {
+                        Debug.Log($"New best brain mass for game {gameLevel} in difficulty {difficultyLevel} : {difficultyScoreEntry.bestBrainMass} g -> {brainMass} g");
+                        difficultyScoreEntry.bestBrainMass = brainMass;
+                    }
+
+                    if (medal != MedalType.None && medal > difficultyScoreEntry.bestMedal)
+                    {
+                        Debug.Log($"New best medal for game {gameLevel} in difficulty {difficultyLevel} : {difficultyScoreEntry.bestMedal} -> {medal}");
+                    }
                 }
             }
         }

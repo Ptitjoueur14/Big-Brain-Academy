@@ -97,7 +97,7 @@ namespace Modes.Stretching
                     break;
             }
             
-            GameManager.Instance.brainScoreDatabase.RegisterScore(GameManager.Instance.gameLevel, brainMass, obtainedMedal);
+            GameManager.Instance.brainScoreDatabase.RegisterScore(GameManager.Instance.gameLevel, GameManager.Instance.difficultyLevel, brainMass, obtainedMedal);
             GameManager.Instance.Save();
             
             // Go to end scene
