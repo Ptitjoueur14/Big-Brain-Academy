@@ -222,8 +222,9 @@ namespace Games.Maths.BalloonBurst
                     balloon.fractionUpNumber = GetRandomNumber(1, maxFractionNumber);
                     balloon.fractionDownNumber = GetRandomNumber(2, maxFractionNumber);
                     while (balloons.Any(balloonList => 
-                               (balloonList.isNumberFraction && balloonList.fractionUpNumber == balloon.fractionUpNumber && balloonList.fractionDownNumber == balloon.fractionDownNumber) 
-                           || !balloonList.isNumberFraction && Mathf.Approximately(balloonList.number, (float) balloon.fractionUpNumber / balloon.fractionDownNumber)))
+                               (balloonList.isNumberFraction && balloonList.fractionUpNumber == balloon.fractionUpNumber && balloonList.fractionDownNumber == balloon.fractionDownNumber) // 2 identical fraction balloons with same numbers 
+                               || (balloonList.isNumberFraction && balloonList.fractionUpNumber / balloonList.fractionDownNumber == balloon.fractionUpNumber / balloon.fractionDownNumber) // 2 equal fraction balloons with different numbers but same fracion result
+                               || !balloonList.isNumberFraction && Mathf.Approximately(balloonList.number, (float) balloon.fractionUpNumber / balloon.fractionDownNumber))) // One normal balloon equal to the fraction result of the fraction balloon
                     {
                         balloon.fractionUpNumber = GetRandomNumber(1, maxFractionNumber);
                         balloon.fractionDownNumber = GetRandomNumber(2, maxFractionNumber);
