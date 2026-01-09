@@ -40,6 +40,7 @@ namespace Modes.Stretching
                     gameLevel = gameLevel,
                 };
                 newGameScoreEntry.difficultyScores.Add(newDifficultyScoreEntry);
+                gameScores.Add(newGameScoreEntry);
                 Debug.Log($"New game entry added for game {gameLevel} in difficulty {difficultyLevel} : new brain mass of {brainMass} g with new medal of {medal}");
             }
 
