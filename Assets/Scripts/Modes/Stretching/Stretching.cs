@@ -97,6 +97,9 @@ namespace Modes.Stretching
                     break;
             }
             
+            GameManager.Instance.brainScoreDatabase.RegisterScore(GameManager.Instance.gameLevel, brainMass, obtainedMedal);
+            GameManager.Instance.Save();
+            
             // Go to end scene
             DontDestroyOnLoad(gameObject);
             SceneManager.LoadScene("GameEndMenu");

@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public BrainScoreDatabase brainScoreDatabase;
     
     [Header("Game Settings")]
     public DifficultyLevel difficultyLevel;
@@ -33,7 +34,8 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject); 
         }
-        Difficulty.DifficultyLevel = difficultyLevel;
+        
+        SaveSystem.Load(brainScoreDatabase);
     }
 
     public void IncreaseLevelsSolved()
@@ -84,6 +86,12 @@ public class GameManager : MonoBehaviour
         
         BrainMass brainMass = GameObject.FindGameObjectWithTag("BrainMass").GetComponent<BrainMass>();
         brainMass.RestartBrainMassDecrease();
-        
     }
+
+    public void Save()
+    {
+        SaveSystem.Save(brainScoreDatabase);
+    }
+    
+    
 }
