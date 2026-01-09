@@ -199,6 +199,7 @@ namespace Games.Maths.BalloonBurst
         // Spawns a new balloon in a random position
         public Balloon SpawnBalloon()
         {
+            // TODO : Improve while loop for uniqueness with helper functions and HashSet
             if (balloonCount < totalBalloons)
             {
                 // Spawn balloon in random position after checking if it doesn't overlap with a corner or other balloon
@@ -223,7 +224,7 @@ namespace Games.Maths.BalloonBurst
                     balloon.fractionDownNumber = GetRandomNumber(2, maxFractionNumber);
                     while (balloons.Any(balloonList => 
                                (balloonList.isNumberFraction && balloonList.fractionUpNumber == balloon.fractionUpNumber && balloonList.fractionDownNumber == balloon.fractionDownNumber) // 2 identical fraction balloons with same numbers 
-                               || (balloonList.isNumberFraction && balloonList.fractionUpNumber / balloonList.fractionDownNumber == balloon.fractionUpNumber / balloon.fractionDownNumber) // 2 equal fraction balloons with different numbers but same fracion result
+                               || (balloonList.isNumberFraction && Mathf.Approximately((float) balloonList.fractionUpNumber / balloonList.fractionDownNumber, (float) balloon.fractionUpNumber / balloon.fractionDownNumber)) // 2 equal fraction balloons with different numbers but same fracion result
                                || !balloonList.isNumberFraction && Mathf.Approximately(balloonList.number, (float) balloon.fractionUpNumber / balloon.fractionDownNumber))) // One normal balloon equal to the fraction result of the fraction balloon
                     {
                         balloon.fractionUpNumber = GetRandomNumber(1, maxFractionNumber);
