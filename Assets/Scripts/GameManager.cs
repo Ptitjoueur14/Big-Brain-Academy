@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour
         BrainMass brainMass = GameObject.FindGameObjectWithTag("BrainMass").GetComponent<BrainMass>();
         if (Instance.gameMode == GameMode.Stretching)
         {
-            Debug.Log($"Added mass {brainMass.brainMassNumber}");
             brainMass.stretching.AddBrainMass(brainMass.brainMassNumber);
         }
         brainMass.SpawnBrainCloud();
@@ -85,10 +84,14 @@ public class GameManager : MonoBehaviour
         Instance.IncreaseWrongClicks();
         
         BrainMass brainMass = GameObject.FindGameObjectWithTag("BrainMass").GetComponent<BrainMass>();
+        if (Instance.gameMode == GameMode.Stretching)
+        {
+            brainMass.stretching.AddBrainMass(0);
+        }
         brainMass.RestartBrainMassDecrease();
     }
 
-    public void Save()
+    public void SaveDatabase()
     {
         SaveSystem.Save(brainScoreDatabase);
     }
