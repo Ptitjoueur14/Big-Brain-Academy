@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using JetBrains.Annotations;
 using Modes.Stretching;
 using TMPro;
@@ -40,6 +41,19 @@ namespace Menus.LevelSelectionMenu
                 brainMassText.color = new Color(0.3f, 0.3f, 0.3f);
                 Debug.Log($"Found no difficulty entry for game {GameManager.Instance.gameLevel} in difficulty {difficultyLevel}");
                 return;
+            }
+
+            // Disable expert difficulty if Hard difficulty doesn't have Gold medal
+            if (difficultyLevel == DifficultyLevel.Hard)
+            {
+                if (difficultyScoreEntry.bestMedal < MedalType.Gold)
+                {
+                    levelSelectionMenu.difficultyButtons.Last().gameObject.SetActive(false);
+                }
+                else
+                {
+                    levelSelectionMenu.difficultyButtons.Last().gameObject.SetActive(true);
+                }
             }
 
             brainMassText.text = difficultyScoreEntry.bestBrainMass + " g";

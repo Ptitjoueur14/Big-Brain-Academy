@@ -316,6 +316,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasLevelSelectionMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 8776488241867816169, guid: d56ce4057baeba145acfebdbe1209351, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
