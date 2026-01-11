@@ -1,5 +1,3 @@
-using System;
-using Modes;
 using Modes.Stretching;
 using TMPro;
 using UnityEngine;
@@ -24,6 +22,11 @@ public class GameManager : MonoBehaviour
     [Header("Game Statistics")] 
     public int wrongClicks;
     public TMP_Text wrongClicksText;
+
+    [Header("Level Finish Icon")] 
+    public Canvas canvasParent;
+    public GameObject solvedIconPrefab;
+    public GameObject errorIconPrefab;
     
     private void Awake()
     {
@@ -81,6 +84,9 @@ public class GameManager : MonoBehaviour
             brainMass.stretching.DecreaseRemainingLevels();
         }
         brainMass.SpawnBrainCloud();
+
+        Instance.canvasParent = FindFirstObjectByType<Canvas>();
+        Instantiate(Instance.solvedIconPrefab, Instance.transform.position, Quaternion.identity, Instance.canvasParent.transform);
     }
 
     public static void Lose()
@@ -95,6 +101,9 @@ public class GameManager : MonoBehaviour
             brainMass.stretching.DecreaseRemainingLevels();
         }
         brainMass.RestartBrainMassDecrease();
+
+        Instance.canvasParent = FindFirstObjectByType<Canvas>();
+        Instantiate(Instance.errorIconPrefab, Instance.transform.position, Quaternion.identity, Instance.canvasParent.transform);
     }
 
     public void SaveDatabases()

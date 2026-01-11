@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace Games.Maths
+namespace Games.Maths.BalloonBurst
 {
     public class Balloon : MonoBehaviour
     {

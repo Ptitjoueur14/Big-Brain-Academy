@@ -378,6 +378,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5467331207259188694, guid: c6eb5d00a03c3b2488a787e539ab30dd, type: 3}
+      propertyPath: errorIconPrefab
+      value: 
+      objectReference: {fileID: 6097134503685773380, guid: 48ba2c0acf6a7d244a78ce9b2355d261, type: 3}
+    - target: {fileID: 5467331207259188694, guid: c6eb5d00a03c3b2488a787e539ab30dd, type: 3}
+      propertyPath: solvedIconPrefab
+      value: 
+      objectReference: {fileID: 7299529372265017176, guid: b1db79690797e4c44be16a5e33994f88, type: 3}
     - target: {fileID: 6521220096519034204, guid: c6eb5d00a03c3b2488a787e539ab30dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.6494145
