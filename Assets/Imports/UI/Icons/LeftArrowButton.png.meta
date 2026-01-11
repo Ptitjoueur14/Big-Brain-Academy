@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2b33e4246fba4f145a1b3a43e14662a0
+guid: fb2bc378c50c8ee438e8c1e209c52886
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4346244404228752641
-    second: Arrow_0
+      213: 4329631919003424582
+    second: LeftArrowButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,10 +126,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Arrow_0
+      name: LeftArrowButton_0
       rect:
         serializedVersion: 2
-        x: 11
+        x: 10
         y: 5
         width: 11
         height: 20
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ffa7ae2edb90fa3c0800000000000000
-      internalID: -4346244404228752641
+      spriteID: 647546c7a41f51c30800000000000000
+      internalID: 4329631919003424582
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Arrow_0: -4346244404228752641
+      LeftArrowButton_0: 4329631919003424582
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

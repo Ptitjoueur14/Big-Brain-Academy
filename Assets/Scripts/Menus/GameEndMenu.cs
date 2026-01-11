@@ -10,15 +10,18 @@ namespace Menus
     {
         [Header("Stretching")]
         public Stretching stretching;
-        
         public TMP_Text categoryText;
         public TMP_Text levelText;
         public TMP_Text difficultyText;
         
-        public TMP_Text errorsText;
-        
-        public Sprite medalSprite;
+        [Header("Leaderboard Ranking")]
+        public DifficultyLeaderboardRanking difficultyLeaderboardRanking;
+        public LeaderboardRank leaderboardRank;
+        public TMP_Text rankText;
         public TMP_Text brainMassText;
+        public TMP_Text errorsText;
+        public GameObject leftArrowButton;
+        public GameObject rightArrowButton;
         
         [Header("Medal Sprites")]
         public Sprite noMedalSprite;
@@ -31,8 +34,14 @@ namespace Menus
         {
             stretching = FindFirstObjectByType<Stretching>();
             UpdateTitleTexts();
-            UpdateMedalAndBrainMass();
-            errorsText.text = stretching.errors.ToString();
+            
+            LeaderboardRanking leaderboardRanking = GameManager.Instance.leaderboardRanking;
+            difficultyLeaderboardRanking =
+                leaderboardRanking.FindDifficultyLeaderboardRanking(GameManager.Instance.gameLevel,
+                    GameManager.Instance.difficultyLevel);
+            leaderboardRank = difficultyLeaderboardRanking.leaderboardRankings.Find(rank => rank.brainMass == stretching.brainMass && rank.errors == stretching.errors);
+            UpdateLeaderboardRank(leaderboardRank);
+            UpdateArrowButtons();
         }
 
         public void UpdateTitleTexts()
@@ -77,34 +86,35 @@ namespace Menus
             }
         }
 
-        public void UpdateMedalAndBrainMass()
+        public void UpdateLeaderboardRank(LeaderboardRank rank)
         {
-            switch (stretching.obtainedMedal)
+            rankText.text = rank.rank.ToString();
+            brainMassText.text = rank.brainMass + " g";
+            UpdateBrainMass(rank.brainMass);
+            errorsText.text = rank.errors.ToString();
+        }
+
+        public void UpdateBrainMass(int brainMass)
+        {
+            switch (brainMass)
             {
-                case MedalType.Platinum:
-                    medalSprite = platinumMedalSprite;
+                case >= 400:
                     brainMassText.color = Color.cyan;
                     break;
-                case MedalType.Gold:
-                    medalSprite = goldMedalSprite;
+                case >= 300:
                     brainMassText.color = Color.yellow;
                     break;
-                case MedalType.Silver:
-                    medalSprite = silverMedalSprite;
+                case >= 200:
                     brainMassText.color = Color.gray;
                     break;
-                case MedalType.Bronze:
-                    medalSprite = bronzeMedalSprite;
+                case >= 100:
                     brainMassText.color = new Color(1f, 0.5f, 0f);
                     break;
-                case MedalType.None:
+                case < 100:
                     // TODO : Text for case None
-                    medalSprite = noMedalSprite;
                     brainMassText.color = Color.black;
                     break;
             }
-            
-            brainMassText.text = stretching.brainMass + " g";
         }
 
         public void OnMainMenuButtonClicked()
@@ -112,6 +122,45 @@ namespace Menus
             SceneManager.LoadScene("MainMenu");
             // TODO: Destroy Stretching from DontDestroyOnLoad
             Destroy(stretching.gameObject);
+        }
+
+        public void OnLeftArrowButtonClicked()
+        {
+            int previousRank = leaderboardRank.rank;
+            leaderboardRank = difficultyLeaderboardRanking.leaderboardRankings[previousRank - 2];
+            UpdateLeaderboardRank(leaderboardRank);
+            UpdateArrowButtons();
+        }
+        
+        public void OnRightArrowButtonClicked()
+        {
+            int previousRank = leaderboardRank.rank;
+            leaderboardRank = difficultyLeaderboardRanking.leaderboardRankings[previousRank];
+            UpdateLeaderboardRank(leaderboardRank);
+            UpdateArrowButtons();
+        }
+
+        public void UpdateArrowButtons()
+        {
+            if (leaderboardRank.rank == 1)
+            {
+                leftArrowButton.SetActive(false);
+            }
+
+            if (leaderboardRank.rank < difficultyLeaderboardRanking.leaderboardRankings.Count)
+            {
+                rightArrowButton.SetActive(true);
+            }
+            
+            if (leaderboardRank.rank > 1)
+            {
+                leftArrowButton.SetActive(true);
+            }
+            
+            if (leaderboardRank.rank == difficultyLeaderboardRanking.leaderboardRankings.Count)
+            {
+                rightArrowButton.SetActive(false);
+            }
         }
     }
 }
