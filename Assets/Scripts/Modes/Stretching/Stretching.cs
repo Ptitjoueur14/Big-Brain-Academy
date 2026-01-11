@@ -102,9 +102,10 @@ namespace Modes.Stretching
                 case MedalType.None: // No medals ( < 100 g)
                     break;
             }
-            
+
             GameManager.Instance.brainScoreDatabase.RegisterScore(GameManager.Instance.gameLevel, GameManager.Instance.difficultyLevel, brainMass, obtainedMedal);
-            GameManager.Instance.SaveDatabase();
+            GameManager.Instance.leaderboardRanking.RegisterRank(GameManager.Instance.gameLevel, GameManager.Instance.difficultyLevel, brainMass, errors);
+            GameManager.Instance.SaveDatabases();
             
             // Go to end scene
             DontDestroyOnLoad(gameObject);

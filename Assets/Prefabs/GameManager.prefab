@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brainScoreDatabase: {fileID: 11400000, guid: 8f579f051392515478b62655f3213c04, type: 2}
+  leaderboardRanking: {fileID: 11400000, guid: 48611cec91197714ea4fa4e9ba9bc4cf, type: 2}
   difficultyLevel: 1
   gameMode: 1
   gameCategory: 2

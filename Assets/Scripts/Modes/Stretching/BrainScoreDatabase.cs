@@ -8,7 +8,13 @@ namespace Modes.Stretching
     public class GameScoreEntry
     {
         public GameLevel gameLevel;
-        public List<DifficultyScoreEntry> difficultyScores = new();
+        public List<DifficultyScoreEntry> difficultyScores;
+
+        public GameScoreEntry(GameLevel gameLevel)
+        {
+            this.gameLevel = gameLevel;
+            this.difficultyScores = new List<DifficultyScoreEntry>();
+        }
     }
     
     [System.Serializable]
@@ -17,9 +23,16 @@ namespace Modes.Stretching
         public DifficultyLevel difficultyLevel;
         public int bestBrainMass;
         public MedalType bestMedal;
+
+        public DifficultyScoreEntry(DifficultyLevel difficultyLevel, int bestBrainMass, MedalType bestMedal)
+        {
+            this.difficultyLevel = difficultyLevel;
+            this.bestBrainMass = bestBrainMass;
+            this.bestMedal = bestMedal;
+        }
     }
     
-    [CreateAssetMenu(fileName = "BrainScoreDatabase", menuName = "Game/Brain Score Database")]
+    [CreateAssetMenu(fileName = "BrainScoreDatabase", menuName = "Game/Stretching/Brain Score Database")]
     public class BrainScoreDatabase : ScriptableObject
     {
         public List<GameScoreEntry> gameScores = new();
@@ -30,16 +43,8 @@ namespace Modes.Stretching
 
             if (gameScoreEntry == null)
             {
-                DifficultyScoreEntry newDifficultyScoreEntry = new DifficultyScoreEntry
-                {
-                    difficultyLevel = difficultyLevel,
-                    bestBrainMass = brainMass,
-                    bestMedal = medal,
-                };
-                GameScoreEntry newGameScoreEntry = new GameScoreEntry
-                {
-                    gameLevel = gameLevel,
-                };
+                DifficultyScoreEntry newDifficultyScoreEntry = new DifficultyScoreEntry(difficultyLevel, brainMass, medal);
+                GameScoreEntry newGameScoreEntry = new GameScoreEntry(gameLevel);
                 newGameScoreEntry.difficultyScores.Add(newDifficultyScoreEntry);
                 gameScores.Add(newGameScoreEntry);
                 Debug.Log($"New game entry added for game {gameLevel} in difficulty {difficultyLevel} : new brain mass of {brainMass} g with new medal of {medal}");
@@ -50,12 +55,7 @@ namespace Modes.Stretching
                 DifficultyScoreEntry difficultyScoreEntry = gameScoreEntry.difficultyScores.Find(entry => entry.difficultyLevel == difficultyLevel);
                 if (difficultyScoreEntry == null)
                 {
-                    DifficultyScoreEntry newDifficultyScoreEntry = new DifficultyScoreEntry
-                    {
-                        difficultyLevel = difficultyLevel,
-                        bestBrainMass = brainMass,
-                        bestMedal = medal,
-                    };
+                    DifficultyScoreEntry newDifficultyScoreEntry = new DifficultyScoreEntry(difficultyLevel, brainMass, medal);
                     gameScoreEntry.difficultyScores.Add(newDifficultyScoreEntry);
                     Debug.Log($"New difficulty entry added for game {gameLevel} in difficulty {difficultyLevel} : new brain mass of {brainMass} g with new medal of {medal}");
                 }

@@ -6,7 +6,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    
+    [Header("Game Databases")]
     public BrainScoreDatabase brainScoreDatabase;
+    public LeaderboardRanking leaderboardRanking;
     
     [Header("Game Settings")]
     public DifficultyLevel difficultyLevel;
@@ -94,9 +97,10 @@ public class GameManager : MonoBehaviour
         brainMass.RestartBrainMassDecrease();
     }
 
-    public void SaveDatabase()
+    public void SaveDatabases()
     {
-        SaveSystem.Save(brainScoreDatabase);
+        SaveSystem.SaveBrainScoreDatabase(brainScoreDatabase);
+        SaveSystem.SaveLeaderboardRanking(leaderboardRanking);
     }
     
     

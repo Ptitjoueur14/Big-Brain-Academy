@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52897a10a1544c75bd1838a82ff70db9, type: 3}
+  m_Name: LeaderboardRanking
+  m_EditorClassIdentifier: 
+  gameLeaderboardRankings:
+  - gameLevel: 1
+    difficultyLeaderboardRankings:
+    - difficultyLevel: 1
+      leaderboardRankings:
+      - rank: 1
+        brainMass: 461
+        errors: 0
+      - rank: 2
+        brainMass: 434
+        errors: 0
+      - rank: 3
+        brainMass: 400
+        errors: 1
+      - rank: 4
+        brainMass: 382
+        errors: 0
+  - gameLevel: 2
+    difficultyLeaderboardRankings:
+    - difficultyLevel: 1
+      leaderboardRankings:
+      - rank: 1
+        brainMass: 491
+        errors: 0
+      - rank: 2
+        brainMass: 433
+        errors: 1
+    - difficultyLevel: 2
+      leaderboardRankings:
+      - rank: 1
+        brainMass: 420
+        errors: 0
