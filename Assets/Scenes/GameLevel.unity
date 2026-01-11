@@ -398,6 +398,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 11207215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1717438662 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6729433135286960571, guid: 5867404618c65404a95416387e1c8500, type: 3}
+  m_PrefabInstance: {fileID: 47151920947542824}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1737498291
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +479,9 @@ MonoBehaviour:
   brainMassList: 
   brainMass: 0
   maxBrainMassListCount: 10
+  remainingLevelsText: {fileID: 1717438662}
+  remainingLevels: 10
+  errors: 0
   obtainedMedal: 4
   platinumMedalPrefab: {fileID: 0}
   goldMedalPrefab: {fileID: 0}
@@ -482,10 +496,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 118578131191967855, guid: 5867404618c65404a95416387e1c8500, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 945976115714195524, guid: 5867404618c65404a95416387e1c8500, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -498,26 +508,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4479208140197685920}
-    - target: {fileID: 2644911571081816110, guid: 5867404618c65404a95416387e1c8500, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6366025279516246322, guid: 5867404618c65404a95416387e1c8500, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4479208140197685920}
-    - target: {fileID: 6760583742968733655, guid: 5867404618c65404a95416387e1c8500, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6796307334968114089, guid: 5867404618c65404a95416387e1c8500, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 7440119678969438281, guid: 5867404618c65404a95416387e1c8500, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8063925665066875761, guid: 5867404618c65404a95416387e1c8500, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -597,10 +595,6 @@ PrefabInstance:
     - target: {fileID: 8063925665066875761, guid: 5867404618c65404a95416387e1c8500, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8437447531852122751, guid: 5867404618c65404a95416387e1c8500, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

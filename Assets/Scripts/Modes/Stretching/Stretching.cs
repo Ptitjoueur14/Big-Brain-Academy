@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,9 +17,14 @@ namespace Modes.Stretching
     public class Stretching : MonoBehaviour
     {
         [Header("Brain Mass")]
-        public List<int> brainMassList;
+        public List<int> brainMassList; // The list containing the 10 brain masses of the Stretching game
         public int brainMass; // The average brain mass of the brain mass list
         public int maxBrainMassListCount = 10; // 10 levels per Stretching game
+
+        [Header("Game Stats")] 
+        public TMP_Text remainingLevelsText;
+        public int remainingLevels = 10;
+        public int errors;
 
         [Header("Medals")]
         public MedalType obtainedMedal; // The medal obtained in the Stretching Game
@@ -103,6 +109,12 @@ namespace Modes.Stretching
             // Go to end scene
             DontDestroyOnLoad(gameObject);
             SceneManager.LoadScene("GameEndMenu");
+        }
+
+        public void DecreaseRemainingLevels()
+        {
+            remainingLevels--;
+            remainingLevelsText.text = remainingLevels.ToString();
         }
     }
 }

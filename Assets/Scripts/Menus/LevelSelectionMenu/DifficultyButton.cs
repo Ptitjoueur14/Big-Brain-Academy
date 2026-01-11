@@ -13,7 +13,7 @@ namespace Menus.LevelSelectionMenu
         public DifficultyLevel difficultyLevel;
         
         [Header("UI Elements")] 
-        public Image medalImage;
+        public Sprite medalSprite;
         public TMP_Text brainMassText;
         
         [Header("Level Selection Menu")]
@@ -35,7 +35,7 @@ namespace Menus.LevelSelectionMenu
             DifficultyScoreEntry difficultyScoreEntry = GetDifficultyScoreEntry();
             if (difficultyScoreEntry == null)
             {
-                medalImage.sprite = levelSelectionMenu.noMedalSprite;
+                medalSprite = levelSelectionMenu.noMedalSprite;
                 brainMassText.text = "0 g";
                 brainMassText.color = new Color(0.3f, 0.3f, 0.3f);
                 Debug.Log($"Found no difficulty entry for game {GameManager.Instance.gameLevel} in difficulty {difficultyLevel}");
@@ -46,23 +46,23 @@ namespace Menus.LevelSelectionMenu
             switch (difficultyScoreEntry.bestMedal)
             {
                 case MedalType.Platinum:
-                    medalImage.sprite = levelSelectionMenu.platinumMedalSprite;
+                    medalSprite = levelSelectionMenu.platinumMedalSprite;
                     brainMassText.color = Color.cyan;
                     break;
                 case MedalType.Gold:
-                    medalImage.sprite = levelSelectionMenu.goldMedalSprite;
+                    medalSprite = levelSelectionMenu.goldMedalSprite;
                     brainMassText.color = Color.yellow;
                     break;
                 case MedalType.Silver:
-                    medalImage.sprite = levelSelectionMenu.silverMedalSprite;
+                    medalSprite = levelSelectionMenu.silverMedalSprite;
                     brainMassText.color = Color.gray;
                     break;
                 case MedalType.Bronze:
-                    medalImage.sprite = levelSelectionMenu.bronzeMedalSprite;
+                    medalSprite = levelSelectionMenu.bronzeMedalSprite;
                     brainMassText.color = new Color(1f, 0.5f, 0f);
                     break;
                 case MedalType.None:
-                    medalImage.sprite = levelSelectionMenu.noMedalSprite;
+                    medalSprite = levelSelectionMenu.noMedalSprite;
                     brainMassText.color = Color.black;
                     break;
             }

@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         if (Instance.gameMode == GameMode.Stretching)
         {
             brainMass.stretching.AddBrainMass(brainMass.brainMassNumber);
+            brainMass.stretching.DecreaseRemainingLevels();
         }
         brainMass.SpawnBrainCloud();
     }
@@ -87,6 +88,8 @@ public class GameManager : MonoBehaviour
         if (Instance.gameMode == GameMode.Stretching)
         {
             brainMass.stretching.AddBrainMass(0);
+            brainMass.stretching.errors++;
+            brainMass.stretching.DecreaseRemainingLevels();
         }
         brainMass.RestartBrainMassDecrease();
     }
