@@ -108,7 +108,7 @@ namespace Menus
                     brainMassText.color = Color.gray;
                     break;
                 case >= 100:
-                    brainMassText.color = new Color(1f, 0.5f, 0f);
+                    brainMassText.color = new Color(0.8f, 0.5f, 0f);
                     break;
                 case < 100:
                     // TODO : Text for case None

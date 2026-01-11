@@ -73,7 +73,7 @@ namespace Menus.LevelSelectionMenu
                     break;
                 case MedalType.Bronze:
                     medalSprite = levelSelectionMenu.bronzeMedalSprite;
-                    brainMassText.color = new Color(1f, 0.5f, 0f);
+                    brainMassText.color = new Color(0.8f, 0.5f, 0f);
                     break;
                 case MedalType.None:
                     medalSprite = levelSelectionMenu.noMedalSprite;
