@@ -179,11 +179,11 @@ MonoBehaviour:
   - {fileID: 4023135295969774271}
   - {fileID: 1459330043236076758}
   - {fileID: 5588687022960733231}
-  noMedalSprite: {fileID: 0}
-  bronzeMedalSprite: {fileID: 0}
-  silverMedalSprite: {fileID: 0}
-  goldMedalSprite: {fileID: 0}
-  platinumMedalSprite: {fileID: 0}
+  noMedalSprite: {fileID: -3421445982531308907, guid: fe8a41b051563c640889f3749b141763, type: 3}
+  bronzeMedalSprite: {fileID: 6689525740294908592, guid: 469cd418e18fea14aaa4d6608df40b53, type: 3}
+  silverMedalSprite: {fileID: -8390845624486075857, guid: 63f9153fb449f4b46afb1442d7273252, type: 3}
+  goldMedalSprite: {fileID: 8494625075034184327, guid: 483a8e099528ac84685174ad9646e5f3, type: 3}
+  platinumMedalSprite: {fileID: -4082162557189656343, guid: 1f7a27acc995df24ea732a4056f9904b, type: 3}
 --- !u!1 &2107762066518532937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,11 +2709,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6400320715161375727, guid: ce2626c9c76bd2245a31ecb400a10f69, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 212.41
+      value: 326.03
       objectReference: {fileID: 0}
     - target: {fileID: 6400320715161375727, guid: ce2626c9c76bd2245a31ecb400a10f69, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -21.080002
+      value: 0.47000122
       objectReference: {fileID: 0}
     - target: {fileID: 6400320715161375727, guid: ce2626c9c76bd2245a31ecb400a10f69, type: 3}
       propertyPath: m_AnchoredPosition.y

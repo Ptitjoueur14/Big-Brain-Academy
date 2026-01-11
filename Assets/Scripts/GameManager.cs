@@ -90,8 +90,8 @@ public class GameManager : MonoBehaviour
         BrainMass brainMass = GameObject.FindGameObjectWithTag("BrainMass").GetComponent<BrainMass>();
         if (Instance.gameMode == GameMode.Stretching)
         {
-            brainMass.stretching.AddBrainMass(0);
             brainMass.stretching.errors++;
+            brainMass.stretching.AddBrainMass(0);
             brainMass.stretching.DecreaseRemainingLevels();
         }
         brainMass.RestartBrainMassDecrease();

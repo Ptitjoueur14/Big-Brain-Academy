@@ -12,8 +12,9 @@ namespace Menus.LevelSelectionMenu
     {
         [Header("Difficulty")]
         public DifficultyLevel difficultyLevel;
-        
+
         [Header("UI Elements")] 
+        public Image medalImage;
         public Sprite medalSprite;
         public TMP_Text brainMassText;
         
@@ -80,6 +81,8 @@ namespace Menus.LevelSelectionMenu
                     brainMassText.color = Color.black;
                     break;
             }
+
+            medalImage.sprite = medalSprite;
             Debug.Log($"Found difficulty entry for game {GameManager.Instance.gameLevel} in difficulty {difficultyLevel} : Found {difficultyScoreEntry.bestMedal} medal with {difficultyScoreEntry.bestBrainMass} g");
         }
     }
